@@ -1,21 +1,35 @@
 package client;
 
 import game.entities.Player;
+import game.framework.Game;
 import game.framework.ID;
+import game.window.Camera;
+import game.window.Handler;
 import packets.UpdateParameters;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class PlayerHandler {
+public class PlayerHandler implements Serializable {
 
+    private transient Game game;
     public Player myPlayer;
-    public HashMap<UUID, Player> players = new HashMap<>();
+    public transient HashMap<UUID, Player> players = new HashMap<>();
 
-    public PlayerHandler(){
+    private transient boolean leftWalk, rightWalk, leftRun, rightRun;
 
+    public PlayerHandler(Game game){
+        this.game = game;
+        //myPlayer = new Player(0, 0, UUID.randomUUID(), ID.Player, "Bob", this, handler);
+
+    }
+
+    public void reinit(Game game){
+        this.game = game;
+        this.players = new HashMap<>();
     }
 
     public void tick() {
@@ -46,7 +60,7 @@ public class PlayerHandler {
 
             UUID uuid = entry.getKey();
             UpdateParameters parameters = entry.getValue();
-            Player player = new Player(parameters.x, parameters.y, uuid, ID.Player, names.get(uuid));
+            Player player = new Player(parameters.x, parameters.y, uuid, ID.Player, names.get(uuid), this, game.getHandler());
             //updatePlayer(player, parameters);
             this.addPlayer(player);
         }
@@ -58,6 +72,38 @@ public class PlayerHandler {
 
     public void removePlayer(UUID uuid) {
         players.remove(uuid);
+    }
+
+    public boolean isLeftWalk() {
+        return leftWalk;
+    }
+
+    public void setLeftWalk(boolean leftWalk) {
+        this.leftWalk = leftWalk;
+    }
+
+    public boolean isRightWalk() {
+        return rightWalk;
+    }
+
+    public void setRightWalk(boolean rightWalk) {
+        this.rightWalk = rightWalk;
+    }
+
+    public boolean isLeftRun() {
+        return leftRun;
+    }
+
+    public void setLeftRun(boolean leftRun) {
+        this.leftRun = leftRun;
+    }
+
+    public boolean isRightRun() {
+        return rightRun;
+    }
+
+    public void setRightRun(boolean rightRun) {
+        this.rightRun = rightRun;
     }
 
 }

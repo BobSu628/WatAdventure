@@ -139,7 +139,7 @@ public class ItemMenu extends Menu {
     }
 
     public void initializeItemButtons() {
-        Player player = game.getHandler().player;
+        Player player = game.getPlayerHandler().myPlayer;
         Iterator<Map.Entry<Item, Integer>> listItems = player.getItemMap().entrySet().iterator();
         index = 0;
         while (listItems.hasNext()) {

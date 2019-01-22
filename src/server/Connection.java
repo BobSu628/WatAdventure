@@ -1,6 +1,6 @@
 package server;
 
-import client.packets.*;
+import packets.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

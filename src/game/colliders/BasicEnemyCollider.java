@@ -1,5 +1,6 @@
 package game.colliders;
 
+import client.PlayerHandler;
 import game.entities.Entity;
 import game.entities.TA;
 import game.entities.Player;
@@ -24,10 +25,12 @@ public class BasicEnemyCollider extends EntityCollider{
 
     @Override
     public void collision(Handler handler) {
-        this.collidePlayer(handler.player);
-
         super.collision(handler);
 
+    }
+
+    public void collisionPlayer(PlayerHandler playerHandler){
+        this.collidePlayer(playerHandler.myPlayer);
     }
 
     protected void collideBlock(Block block){

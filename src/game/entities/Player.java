@@ -1,5 +1,6 @@
 package game.entities;
 
+import client.PlayerHandler;
 import game.framework.Game;
 import game.colliders.Collider;
 import game.colliders.PlayerCollider;
@@ -26,7 +27,7 @@ public class Player extends Entity {
     public enum AttackState implements Serializable {
         Melee(),
         Ranged(),
-        Special()
+        Magic()
     }
 
     private static final int WALK_X = 5;
@@ -49,10 +50,13 @@ public class Player extends Entity {
     private int coin = 0;
     private AttackState attackState;
 
+    private transient PlayerHandler playerHandler;
+
     //Iterator<Map.Entry> listItems;
 
-    public Player(float x, float y, UUID uuid, ID id, String name, Handler handler){
+    public Player(float x, float y, UUID uuid, ID id, String name, PlayerHandler playerHandler, Handler handler){
         super(x, y, id, handler);
+        this.playerHandler = playerHandler;
         this.uuid = uuid; //ID on network
         this.name = name; //user name
         this.width = 32; //width of whole sprite
@@ -79,9 +83,10 @@ public class Player extends Entity {
 
     }
 
-    public void reinit(){
+    public void reinit(Game game){
         super.reinit();
         texture = Game.getInstance();
+        playerHandler = game.getPlayerHandler();
         playerWalk = new Animation(5, texture.player[1], texture.player[2], texture.player[3], texture.player[4], texture.player[5], texture.player[6]);
         playerWalkLeft = new Animation(5, texture.player[8], texture.player[9], texture.player[10], texture.player[11], texture.player[12], texture.player[13]);
         playerMeleeAttackRight = new Animation(5,texture.player_attack[0],texture.player_attack[1]);
@@ -94,7 +99,7 @@ public class Player extends Entity {
     @Override
     public void destroy() {
         //System.exit(0);
-        handler.getGame().quit();
+        //handler.getGame().quit();
     }
 
     @Override
@@ -103,21 +108,21 @@ public class Player extends Entity {
 
         //movement
         if(!inKnockBack) {
-            if (handler.isRightRun()) {
+            if (playerHandler.isRightRun()) {
                 facing = 1;
                 velX = RUN_X;
-            } else if (handler.isRightWalk()) {
+            } else if (playerHandler.isRightWalk()) {
                 facing = 1;
                 velX = WALK_X;
-            } else if (!handler.isLeftRun() && handler.isLeftWalk()) velX = 0;
+            } else if (!playerHandler.isLeftRun() && playerHandler.isLeftWalk()) velX = 0;
 
-            if (handler.isLeftRun()) {
+            if (playerHandler.isLeftRun()) {
                 facing = -1;
                 velX = -RUN_X;
-            } else if (handler.isLeftWalk()) {
+            } else if (playerHandler.isLeftWalk()) {
                 facing = -1;
                 velX = -WALK_X;
-            } else if (!handler.isRightRun() && !handler.isRightWalk()) velX = 0;
+            } else if (!playerHandler.isRightRun() && !playerHandler.isRightWalk()) velX = 0;
 
             if(onLadder) canClimb = true;
             else canClimb = false;
@@ -130,10 +135,10 @@ public class Player extends Entity {
             }
 
         }else{
-            handler.setLeftWalk(false);
-            handler.setRightWalk(false);
-            handler.setLeftRun(false);
-            handler.setRightRun(false);
+            playerHandler.setLeftWalk(false);
+            playerHandler.setRightWalk(false);
+            playerHandler.setLeftRun(false);
+            playerHandler.setRightRun(false);
         }
 
         //attack
@@ -170,10 +175,12 @@ public class Player extends Entity {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.white);
-        g.drawString(String.valueOf(this.hp), (int)x, (int)y);
+        g.drawString(this.name, (int)x, (int)y);
+        //g.drawString(String.valueOf(this.hp), (int)x, (int)y);
 
-        if(equippedItem != null) g.drawString(equippedItem.toString()+" x "+itemMap.get(equippedItem), (int)x+15, (int)y-15);
-        g.drawString("Coin: "+this.coin, (int)x+15, (int)y);
+        //if(equippedItem != null) g.drawString(equippedItem.toString()+" x "+itemMap.get(equippedItem), (int)x+15, (int)y-15);
+        //g.drawString("Coin: "+this.coin, (int)x+15, (int)y);
+
         if(jumping){
             if (meleeAttacking || rangeAttacking){
                 attackAnimation(g);
@@ -323,22 +330,22 @@ public class Player extends Entity {
     }
 
     public void attackAnimation (Graphics g){
-                if (meleeAttacking) {
-                    if (facing == 1) {
-                        playerMeleeAttackRight.drawAnimation(g, (int) x, (int) y, width, height);
-                        //System.out.println("melee");
-                    } else {
-                        playerMeleeAttackLeft.drawAnimation(g, (int) x, (int) y, width, height);
-                    }
-                }
-                else if (rangeAttacking) {
-                    if (facing == 1) {
-                        playerRangeAttackRight.drawAnimation(g, (int) x, (int) y, width, height);
-                    }
-                    else {
-                        playerRangeAttackLeft.drawAnimation(g,(int)x,(int)y,width,height);
+            if (meleeAttacking) {
+                if (facing == 1) {
+                    playerMeleeAttackRight.drawAnimation(g, (int) x, (int) y, width, height);
+                    //System.out.println("melee");
+                } else {
+                    playerMeleeAttackLeft.drawAnimation(g, (int) x, (int) y, width, height);
                 }
             }
+            else if (rangeAttacking) {
+                if (facing == 1) {
+                    playerRangeAttackRight.drawAnimation(g, (int) x, (int) y, width, height);
+                }
+                else {
+                    playerRangeAttackLeft.drawAnimation(g,(int)x,(int)y,width,height);
+            }
+        }
         //System.out.println("after");
     }
 

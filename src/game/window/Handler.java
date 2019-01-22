@@ -1,4 +1,5 @@
 package game.window;
+//TODO move player to PlayerHandler
 
 import game.entities.Player;
 import game.framework.Game;
@@ -11,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.UUID;
 
 /*
  */
@@ -18,16 +20,19 @@ import java.util.Random;
 public class Handler implements Serializable {
 
     private transient Game game;
-    public Player player;
+    //public Player player;
     public LinkedList<GameObject> object = new LinkedList<GameObject>();
     private GameObject tempObject;
     private transient LevelLoader levelLoader;
-    private Camera camera;
-    private transient BufferedImage level1, level2, cloud;
+    private transient Camera camera;
+    private transient BufferedImage[] maps = new BufferedImage[3];
+    private transient BufferedImage cloud;
     private int cloudY[] = new int[15];
-    private boolean leftWalk, rightWalk, leftRun, rightRun;
+    private int type;
+    private int level;
 
-    public Handler(Game game, Camera camera){
+    public Handler(Game game, Camera camera, char type){
+        this.type = type;
         this.game = game;
         this.camera = camera;
         Random random = new Random();
@@ -37,47 +42,54 @@ public class Handler implements Serializable {
         for(int i = 0; i < 15; i ++){
             cloudY[i] = random.nextInt(Game.WIDTH-cloud.getHeight());
         }
-        player = new Player(0, 0, ID.Player, this);
-
-        levelLoader = new LevelLoader(this);
-        levelLoader.setLevel(level1);
+        game.getPlayerHandler().myPlayer = new Player(0, 0, UUID.randomUUID(), ID.Player, "Bob", game.getPlayerHandler(), this);
+        if(type == 's') {
+            level = 1;
+        }else if(type == 'm'){
+            level = 0;
+        }
+        levelLoader = new LevelLoader(this, game.getPlayerHandler());
+        levelLoader.setLevel(maps[level]);
         levelLoader.load();
     }
 
-    public void initImages(){
+    private void initImages(){
         BufferedImageLoader loader = new BufferedImageLoader();
-        level1 = loader.loadImage("/map.png"); //loading level 1
-        level2 = loader.loadImage("/level2.png"); //loading level 2
+        maps[0] = loader.loadImage("/multi_map.png");
+        maps[1] = loader.loadImage("/level1.png"); //loading level 1
+        maps[2] = loader.loadImage("/level2.png"); //loading level 2
         cloud = loader.loadImage("/cloud.png"); //loading clouds
     }
 
     public void reinit(Game game){
         initImages();
         this.game = game;
-        levelLoader = new LevelLoader(this);
-        if(game.getLevel() == 1) levelLoader.setLevel(level1);
-        player.reinit();
+        this.camera = game.getCamera();
+        levelLoader = new LevelLoader(this, game.getPlayerHandler());
+        levelLoader.setLevel(maps[level]);
+        //player.reinit();
         for(int i = 0; i < object.size(); i ++){
             object.get(i).reinit();
         }
     }
 
     public void tick(){
-        player.tick();
-        if(player.getY() > level1.getHeight()*LevelLoader.FACTOR) player.destroy();
+        //player.tick();
+        //if(player.getY() > level1.getHeight()*LevelLoader.FACTOR) player.destroy();
         for(int i = 0; i < object.size(); i ++){
             tempObject = object.get(i);
             tempObject.tick();
-            if(tempObject.getY() > level1.getHeight()*LevelLoader.FACTOR) tempObject.destroy();
+            if(tempObject.getY() > maps[level].getHeight()*LevelLoader.FACTOR) tempObject.destroy();
         }
     }
 
     public void render(Graphics g){
+        /*
         for(int i = 0; i < 15; i ++){
             g.drawImage(cloud, i*cloud.getWidth()*3, cloudY[i], null);
         }
-
-        player.render(g);
+        */
+        //player.render(g);
         for(int i = 0; i < object.size(); i ++){
             tempObject = object.get(i);
             tempObject.render(g);
@@ -98,14 +110,13 @@ public class Handler implements Serializable {
         this.clearLevel();
         camera.setX(0); camera.setY(0);
 
-        if(game.getLevel() == 1){
-            this.loadImageLevel(level2);
-
-        }else if(game.getLevel() == 2){
+        level ++;
+        if(level == maps.length){
             this.game.quit();
+        }else{
+            this.loadImageLevel(maps[level]);
         }
 
-        game.incrementLevel();
     }
 
     public void addObject(GameObject object){
@@ -114,38 +125,6 @@ public class Handler implements Serializable {
 
     public void removeObject(GameObject object){
         this.object.remove(object);
-    }
-
-    public boolean isLeftWalk() {
-        return leftWalk;
-    }
-
-    public void setLeftWalk(boolean leftWalk) {
-        this.leftWalk = leftWalk;
-    }
-
-    public boolean isRightWalk() {
-        return rightWalk;
-    }
-
-    public void setRightWalk(boolean rightWalk) {
-        this.rightWalk = rightWalk;
-    }
-
-    public boolean isLeftRun() {
-        return leftRun;
-    }
-
-    public void setLeftRun(boolean leftRun) {
-        this.leftRun = leftRun;
-    }
-
-    public boolean isRightRun() {
-        return rightRun;
-    }
-
-    public void setRightRun(boolean rightRun) {
-        this.rightRun = rightRun;
     }
 
     public void setGame(Game game) {

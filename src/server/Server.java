@@ -1,6 +1,6 @@
 package server;
 
-import client.packets.UpdateParameters;
+import packets.UpdateParameters;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

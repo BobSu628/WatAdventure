@@ -23,7 +23,7 @@ public class EventListener {
         // another player joined
         if(p instanceof ClientAddPlayerPacket){
             ClientAddPlayerPacket packet = (ClientAddPlayerPacket) p;
-            playerHandler.addPlayer(new Player(0, 0, packet.uuid, ID.Player, packet.name, handler));
+            playerHandler.addPlayer(new Player(0, 0, packet.uuid, ID.Player, packet.name, playerHandler, handler));
             System.out.println(packet.name + " has joined the game");
         }
         // another player left
@@ -35,7 +35,7 @@ public class EventListener {
         //received player updates
         else if(p instanceof ClientPlayerUpdatePacket){
             ClientPlayerUpdatePacket packet = (ClientPlayerUpdatePacket) p;
-            System.out.println(packet.players.keySet().size());
+            //System.out.println(packet.players.keySet().size());
             for(UUID id: packet.players.keySet()){
                 if(!id.equals(playerHandler.myPlayer.getUUID())) {
                     playerHandler.updatePlayer(id, packet.players.get(id));

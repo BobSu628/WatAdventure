@@ -1,5 +1,6 @@
 package game.entities;
 
+import client.PlayerHandler;
 import game.colliders.BasicEnemyCollider;
 import game.colliders.Collider;
 import game.framework.Game;
@@ -24,6 +25,7 @@ public class TA extends Entity{
 
     //Random random = new Random();
 
+    private PlayerHandler playerHandler;
     private transient Texture texture;
 
     private transient Animation enemyWalk, enemyWalkLeft;
@@ -32,8 +34,9 @@ public class TA extends Entity{
     int confusedTimer;
     public State state;
 
-    public TA(float x, float y, ID id, Handler handler){
+    public TA(float x, float y, ID id, PlayerHandler playerHandler, Handler handler){
         super(x, y, id, handler);
+        this.playerHandler = playerHandler;
         this.width = 32;
         this.height = 64;
         this.normalVel = 2;
@@ -45,7 +48,7 @@ public class TA extends Entity{
         this.knockbackVelY = 8;
         this.jumpVel = -6;
         this.state = State.Patrol;
-        float x1 = sightPoint.x, x2 = (float)handler.player.getSightPoint().getX(), y1 = sightPoint.y, y2 = (float)handler.player.getSightPoint().getY();
+        float x1 = sightPoint.x, x2 = (float)playerHandler.myPlayer.getSightPoint().getX(), y1 = sightPoint.y, y2 = (float)playerHandler.myPlayer.getSightPoint().getY();
         this.vision = new Line2D.Float(x1, y1, x2, y2);
         
         texture = Game.getInstance();
@@ -77,10 +80,12 @@ public class TA extends Entity{
     @Override
     public void tick() {
         super.tick();
+        //collider.collisionPlayer(playerHandler);
+        ((BasicEnemyCollider)collider).collisionPlayer(playerHandler);
         state = identifyState();
 
         if(state == State.Attack && !inKnockBack){
-            Point playerPosition = handler.player.getSightPoint();
+            Point playerPosition = playerHandler.myPlayer.getSightPoint();
             if(playerPosition.getX() > this.sightPoint.getX()) {
                 facing = 1;
                 velX = attackVel;
@@ -101,7 +106,7 @@ public class TA extends Entity{
     }
 
     private State identifyState(){
-        float x1 = sightPoint.x, x2 = (float)handler.player.getSightPoint().getX(), y1 = sightPoint.y, y2 = (float)handler.player.getSightPoint().getY();
+        float x1 = sightPoint.x, x2 = (float)playerHandler.myPlayer.getSightPoint().getX(), y1 = sightPoint.y, y2 = (float)playerHandler.myPlayer.getSightPoint().getY();
         vision = new Line2D.Float(x1, y1, x2, y2);
 
         boolean noAttack = false;

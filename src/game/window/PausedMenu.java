@@ -67,11 +67,12 @@ public class PausedMenu extends KeyAdapter {
 
     private MainCanvas mainCanvas;
     private Game game;
+    private char type;
 
-
-    public PausedMenu(MainCanvas mainCanvas, Game game){
+    public PausedMenu(MainCanvas mainCanvas, Game game, char type){
         this.mainCanvas = mainCanvas;
         this.game = game;
+        this.type = type;
         buttons = new LinkedList<>();
         x = 3*H_UNIT;
         y = 3*V_UNIT;
@@ -88,7 +89,9 @@ public class PausedMenu extends KeyAdapter {
         buttons.add(but_item);
         //buttons.add(but_equipment);
         //buttons.add(but_status);
-        buttons.add(but_save);
+        if(type == 's') {
+            buttons.add(but_save);
+        }
         buttons.add(but_quit);
         itemMenu = new ItemMenu(mainCanvas, game,iM_x,iM_y, iMWidth,iMHeight,but_item);
 
@@ -230,8 +233,10 @@ public class PausedMenu extends KeyAdapter {
         mainCanvas.removeKeyListener(this);
     };
 
-
     ButtonFunction but_quit_func =() -> {
+        if(type == 'm'){
+            mainCanvas.getClient().close();
+        }
         mainCanvas.getMainMenu().setDisplay(true);
         mainCanvas.getMainMenu().getLoadMenu().setActive(false);
         mainCanvas.getMainMenu().getLoadMenu().setDisplay(false);
@@ -285,7 +290,7 @@ public class PausedMenu extends KeyAdapter {
 
     public void initalizeDrawCoin (){
         //coinDisplay.setCoinQuantity(game.getHandler().player.getCoin());
-        coinDisplay.setLabel(game.getHandler().player.getCoin());
+        coinDisplay.setLabel(game.getPlayerHandler().myPlayer.getCoin());
     }
 
     public ItemMenu getItemMenu (){return this.itemMenu;}

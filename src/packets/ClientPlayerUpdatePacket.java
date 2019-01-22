@@ -12,26 +12,8 @@ public class ClientPlayerUpdatePacket implements Serializable {
         players = new HashMap<>();
     }
 
-    /*
-    public ClientPlayerUpdatePacket(HashMap<UUID, UpdateParameters> data){
-        this.players = data;
-    }
-    */
-
     public void addPlayer(UUID uuid, UpdateParameters parameters){
         this.players.put(uuid, parameters);
     }
-
-    public void removePlayer(UUID uuid){
-        this.players.remove(uuid);
-    }
-
-    /*
-    public ClientPlayerUpdatePacket exclone(UUID uuid){
-        ClientPlayerUpdatePacket ret = new ClientPlayerUpdatePacket(this.players);
-        ret.removePlayer(uuid);
-        return ret;
-    }
-    */
 
 }

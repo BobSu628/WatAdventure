@@ -1,5 +1,6 @@
 package game.colliders;
 
+import client.PlayerHandler;
 import game.entities.Entity;
 import game.framework.GameObject;
 import game.framework.ID;

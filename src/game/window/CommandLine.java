@@ -33,7 +33,7 @@ public class CommandLine implements KeyListener {
     public CommandLine(MainCanvas mainCanvas, Game game, Handler handler){
         this.mainCanvas = mainCanvas;
         this.game = game;
-        this.commandHandler = new CommandHandler(handler);
+        this.commandHandler = new CommandHandler(game.getPlayerHandler(), handler);
     }
 
     public void tick(){

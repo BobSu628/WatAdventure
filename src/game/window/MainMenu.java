@@ -27,7 +27,7 @@ public class MainMenu extends Menu{
         buttonX = x;
         buttonY = y;
         buttonWidth = width;
-        buttonHeight = height / 6;
+        buttonHeight = height / 10;
         display = true;
 
         but_newGame =     new Button(buttonX, buttonY, buttonWidth, buttonHeight,"New Game",color, font, but_newGame_function);
@@ -67,7 +67,6 @@ public class MainMenu extends Menu{
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-
 
         if (key == ENTER){
             buttons.get(selectIndex).getButtonFunction().Function();

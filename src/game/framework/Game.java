@@ -1,8 +1,13 @@
 package game.framework;
+import client.PlayerHandler;
 import game.MainCanvas;
 import game.window.*;
+import packets.UpdateParameters;
+
 import java.awt.*;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.UUID;
 
 /*
  */
@@ -14,41 +19,57 @@ public class Game implements Serializable {
 
     private transient MainCanvas mainCanvas;
     private Handler handler;
+    private PlayerHandler playerHandler;
     private Camera camera;
     private transient KeyInput keyInput;
     private transient CommandLine commandLine;
     private transient PausedMenu pausedMenu;
     private transient static Texture texture;
-    private int level = 1;
+    //private int level;
+    private char type;
+    public boolean paused;
 
-    public Game(MainCanvas mainCanvas){
+    public Game(MainCanvas mainCanvas, char type){
+        this.type = type;
+        this.paused = false;
         this.mainCanvas = mainCanvas;
         texture = new Texture();
         camera = new Camera(0, 0);
-        handler = new Handler(this, camera);
-        keyInput = new KeyInput(mainCanvas, this, this.handler);
-        commandLine = new CommandLine(mainCanvas, this, this.handler);
-        pausedMenu = new PausedMenu(mainCanvas, this);
+        playerHandler = new PlayerHandler(this);
+        handler = new Handler(this, camera, type);
+        keyInput = new KeyInput(mainCanvas, this, this.playerHandler);
+        pausedMenu = new PausedMenu(mainCanvas, this, type);
+        if(type == 's'){
+            //playerHandler.myPlayer = handler.player;
+            commandLine = new CommandLine(mainCanvas, this, this.handler);
+            //level = 1;
+        }else if(type == 'm'){
+            //level = 0;
+        }
     }
 
     public void reinit(MainCanvas mainCanvas){
         this.mainCanvas = mainCanvas;
         texture = new Texture();
-        keyInput = new KeyInput(mainCanvas, this, this.handler);
+        keyInput = new KeyInput(mainCanvas, this, this.playerHandler);
         commandLine = new CommandLine(mainCanvas, this, this.handler);
-        pausedMenu = new PausedMenu(mainCanvas, this);
+        pausedMenu = new PausedMenu(mainCanvas, this, type);
         this.handler.reinit(this);
+        this.playerHandler.reinit(this);
 
     }
 
     public void tick() {
-        if (!pausedMenu.isActive()) {
-            handler.tick();
-            camera.tick(handler.player);
-        }else{
-            pausedMenu.tick();
+        if(!paused) {
+            if (type == 'm' || !pausedMenu.isActive()) {
+                handler.tick();
+                playerHandler.tick();
+                camera.tick(playerHandler.myPlayer);
+            }
+            if (pausedMenu.isActive()) {
+                pausedMenu.tick();
+            }
         }
-
     }
 
     public void render(Graphics g){
@@ -61,8 +82,10 @@ public class Game implements Serializable {
         //g.drawImage(background, 0, 0, MainCanvas.WIDTH, MainCanvas.HEIGHT, null); // background image
         g2d.translate(camera.getX(), camera.getY()); //begin of camera
         handler.render(g);
+        playerHandler.render(g);
+
         g2d.translate(-camera.getX(), -camera.getY()); //end of camera
-        if (this.commandLine.isActive()) this.commandLine.render(g);
+        if (type == 's' && this.commandLine.isActive()) this.commandLine.render(g);
         if (this.pausedMenu.isActive()) this.pausedMenu.render(g);
 
         ////////////////////////////////
@@ -76,6 +99,11 @@ public class Game implements Serializable {
         MainCanvas.state = MainCanvas.STATE.MainMenu;
         mainCanvas.addKeyListener(mainCanvas.getMainMenu());
         mainCanvas.removeKeyListener(this.keyInput);
+    }
+
+    // multiplayer mode, add other online players to local game
+    public void initOtherPlayers(HashMap<UUID, UpdateParameters> players, HashMap<UUID, String> names){
+        playerHandler.initOtherPlayers(players, names);
     }
 
     public static Texture getInstance(){
@@ -92,19 +120,22 @@ public class Game implements Serializable {
         return this.keyInput;
     }
 
-    /*
-    public void setKeyInputEnabled(boolean enabled){
-        if(enabled) this.addKeyListener(keyInput);
-        else this.removeKeyListener(keyInput);
+    public PlayerHandler getPlayerHandler() {
+        return playerHandler;
     }
-    */
 
     public Handler getHandler() {
         return handler;
     }
 
+    /*
     public int getLevel() {
         return level;
+    }
+    */
+
+    public Camera getCamera() {
+        return camera;
     }
 
     public void setKeyInput(KeyInput keyInput) {
@@ -119,8 +150,10 @@ public class Game implements Serializable {
         this.pausedMenu = pausedMenu;
     }
 
+    /*
     public void incrementLevel(){
         this.level ++;
     }
+    */
 }
 

@@ -1,5 +1,6 @@
 package game.framework;
 
+import client.PlayerHandler;
 import game.MainCanvas;
 import game.entities.Player;
 import game.window.Handler;
@@ -42,34 +43,31 @@ public class KeyInput extends KeyAdapter {
 
     private transient MainCanvas mainCanvas;
     private Game game;
-    private Handler handler;
+    private PlayerHandler playerHandler;
 
-    //private boolean canStop = true; //whether keyInput can be disabled
-
-    public KeyInput(MainCanvas mainCanvas, Game game, Handler handler)
+    public KeyInput(MainCanvas mainCanvas, Game game, PlayerHandler playerHandler)
     {
         this.mainCanvas = mainCanvas;
         this.game = game;
-        this.handler = handler;
+        this.playerHandler = playerHandler;
     }
 
     @Override
     public void keyPressed(KeyEvent e){
-        //canStop = false;
 
         int key = e.getKeyCode();
-        Player player = handler.player;
-
+        Player player = playerHandler.myPlayer;
+        
         if(key == RIGHTWALK || key == RIGHTRUN){
             if(!player.isInKnockBack() && !player.isAttacking()) {
-                if(key == RIGHTWALK) handler.setRightWalk(true);
-                else if(key == RIGHTRUN) handler.setRightRun(true);
+                if(key == RIGHTWALK) playerHandler.setRightWalk(true);
+                else if(key == RIGHTRUN) playerHandler.setRightRun(true);
             }
         }
         if(key == LEFTWALK || key == LEFTRUN){
             if(!player.isInKnockBack() && !player.isAttacking()) {
-                if(key == LEFTWALK) handler.setLeftWalk(true);
-                else if(key == LEFTRUN) handler.setLeftRun(true);
+                if(key == LEFTWALK) playerHandler.setLeftWalk(true);
+                else if(key == LEFTRUN) playerHandler.setLeftRun(true);
             }
         }
         if(key == JUMP) {
@@ -85,34 +83,31 @@ public class KeyInput extends KeyAdapter {
         if(key == UP && player.isCanClimb()){
             player.setClimbing(true);
         }
-        /*
-
-        if(key == KeyEvent.VK_ESCAPE){
-            System.exit(1);
-        }*/
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        Player player = handler.player;
+        Player player = playerHandler.myPlayer;
 
         if(key == RIGHTWALK || key == RIGHTRUN) {
             if(!player.isInKnockBack()) {
-                if(key == RIGHTRUN) handler.setRightRun(false);
-                else if(key == RIGHTWALK) handler.setRightWalk(false);
+                if(key == RIGHTRUN) playerHandler.setRightRun(false);
+                else if(key == RIGHTWALK) playerHandler.setRightWalk(false);
             }
         }
         if(key == LEFTWALK || key == LEFTRUN) {
             if(!player.isInKnockBack()){
-                if(key == LEFTRUN) handler.setLeftRun(false);
-                else if(key == LEFTWALK) handler.setLeftWalk(false);
+                if(key == LEFTRUN) playerHandler.setLeftRun(false);
+                else if(key == LEFTWALK) playerHandler.setLeftWalk(false);
             }
         }
         if(key == ATTACK){
-            player.setCanAttack(true);
-            if(player.getAttackState() == Player.AttackState.Ranged){
-                player.setRangeAttacking(false);
+            if(!game.paused) {
+                player.setCanAttack(true);
+                if (player.getAttackState() == Player.AttackState.Ranged) {
+                    player.setRangeAttacking(false);
+                }
             }
         }
         if(key == USE_ITEM){
@@ -122,11 +117,13 @@ public class KeyInput extends KeyAdapter {
             player.switchAttackState();
         }
         if(key == COMMANDLINE_ON){
-            suspendControlledMovement();
+            if(game.getCommandLine() != null) {
+                suspendControlledMovement();
 
-            game.getCommandLine().startCommand();
-            game.getCommandLine().setActive(true);
-            switchKeyListener(game.getCommandLine());//disable keyInput
+                game.getCommandLine().startCommand();
+                game.getCommandLine().setActive(true);
+                switchKeyListener(game.getCommandLine());//disable keyInput
+            }
             return;
         }
         if (key == MENU){
@@ -142,6 +139,9 @@ public class KeyInput extends KeyAdapter {
         if(key == UP && player.isClimbing()){
             player.setClimbing(false);
         }
+        if(key == KeyEvent.VK_SPACE){
+            game.paused = !game.paused;
+        }
 
     }
 
@@ -151,10 +151,10 @@ public class KeyInput extends KeyAdapter {
     }
 
     private void suspendControlledMovement(){
-        handler.setLeftWalk(false);
-        handler.setRightWalk(false);
-        handler.setLeftRun(false);
-        handler.setRightRun(false);
+        playerHandler.setLeftWalk(false);
+        playerHandler.setRightWalk(false);
+        playerHandler.setLeftRun(false);
+        playerHandler.setRightRun(false);
     }
 
     public void setGame(Game game) {

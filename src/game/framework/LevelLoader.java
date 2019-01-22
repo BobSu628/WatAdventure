@@ -1,5 +1,6 @@
 package game.framework;
 
+import client.PlayerHandler;
 import game.entities.TA;
 import game.entities.Player;
 import game.items.Elixir;
@@ -9,6 +10,7 @@ import game.objects.*;
 import game.window.Handler;
 
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 public class LevelLoader {
 
@@ -16,14 +18,15 @@ public class LevelLoader {
     private BufferedImage level;
     private ColorCodeTranslator cct;
     private Handler handler;
-    private Player player;
+    private PlayerHandler playerHandler;
 
     public static final int FACTOR = 32;
 
-    public LevelLoader(Handler handler){
-
+    public LevelLoader(Handler handler, PlayerHandler playerHandler){
         this.cct = new ColorCodeTranslator();
         this.handler = handler;
+        this.playerHandler = playerHandler;
+        //playerHandler.myPlayer = new Player(0, 0, UUID.randomUUID(), ID.Player, "Bob", playerHandler, handler);
     }
 
     public void setLevel(BufferedImage level){
@@ -46,13 +49,13 @@ public class LevelLoader {
                     if (identifier.id == ID.Block) {
                         handler.addObject(new Block(displayX, displayY, identifier.type, ID.Block, handler));
                     } else if (identifier.id == ID.Player) {
-                        handler.player.setX(displayX); handler.player.setY(displayY);
+                        playerHandler.myPlayer.setX(displayX); playerHandler.myPlayer.setY(displayY);
                     } else if (identifier.id == ID.Flag) {
                         handler.addObject(new Flag(displayX, displayY, ID.Flag, handler));
                     } else if(identifier.id == ID.Teleport){
                         handler.addObject(new Debug_Teleport(displayX, displayY, ID.Teleport, handler));
                     } else if(identifier.id == ID.Mathiant){
-                        handler.addObject(new TA(displayX, displayY, ID.Mathiant, handler));
+                        handler.addObject(new TA(displayX, displayY, ID.Mathiant, playerHandler, handler));
                     } else if(identifier.id == ID.Elixir){
                         handler.addObject(new Elixir(displayX, displayY, ID.Elixir, handler));
                     } else if(identifier.id == ID.Grenade){

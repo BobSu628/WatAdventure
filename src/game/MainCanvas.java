@@ -7,6 +7,7 @@ import game.window.BufferedImageLoader;
 import game.window.MainMenu;
 import game.window.Window;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -17,15 +18,18 @@ public class MainCanvas extends Canvas implements Runnable{
     public static int WIDTH = 1290;
     public static int HEIGHT = 960;
 
+    private Window window;
     private boolean running;
     private Thread thread;
     private int frameCount, updateCount;
 
+    private Client client;
     private Game game;
 
     public enum STATE{
         MainMenu(),
         Game(),
+        Multiplayer(),
         GameOver()
     }
 
@@ -33,13 +37,14 @@ public class MainCanvas extends Canvas implements Runnable{
     private int mainX = WIDTH / 10*6;
     private int mainY = HEIGHT / 15;
     private int mainWidth = WIDTH / 9;
-    private int mainHeight = HEIGHT / 10 * 3;
+    private int mainHeight = HEIGHT / 10 * 4;
     private MainMenu mainMenu;
     private BufferedImage background;
     private Font font = new Font("Gotham", Font.BOLD, 40);
     public String timeStamps[];
 
     public MainCanvas() {
+
         state = STATE.MainMenu;
         timeStamps = new String[4];
         initTimeStamps();
@@ -49,6 +54,7 @@ public class MainCanvas extends Canvas implements Runnable{
         BufferedImageLoader loader = new BufferedImageLoader();
         background = loader.loadImage("/background.png");
 
+        window = new Window(WIDTH, HEIGHT, "WatAdventure", this);
     }
 
     public void initTimeStamps(){
@@ -127,6 +133,9 @@ public class MainCanvas extends Canvas implements Runnable{
             mainMenu.tick();
         }else if(state == STATE.Game){
             this.game.tick();
+        }else if(state == STATE.Multiplayer){
+            this.client.communicate();
+            this.game.tick();
         }else if(state == STATE.GameOver){
 
         }
@@ -150,6 +159,8 @@ public class MainCanvas extends Canvas implements Runnable{
             this.mainMenu.render(g);
         }else if(state == STATE.Game){
             this.game.render(g);
+        }else if(state == STATE.Multiplayer){
+            this.game.render(g);
         }
         g.setColor(Color.white);
         g.drawString("FPS: " + frameCount, 20, 20);
@@ -162,15 +173,19 @@ public class MainCanvas extends Canvas implements Runnable{
     }
 
     public void startNewGame(){
-        Game game = new Game(this);
-        this.game = game;
+        this.game = new Game(this, 's');
         this.addKeyListener(game.getKeyInput());
         this.removeKeyListener(mainMenu);
         state = STATE.Game;
     }
 
     public void startMultiplayer(){
-        new Client(this, Client.DEFAULT).connect();
+        this.game = new Game(this, 'm');
+        client = new Client(this, this.game, Client.DEFAULT);
+        this.addKeyListener(game.getKeyInput());
+        this.removeKeyListener(mainMenu);
+        client.connect();
+        state = STATE.Multiplayer;
     }
 
     public void saveGame(String timeStamp, int id) {
@@ -220,8 +235,29 @@ public class MainCanvas extends Canvas implements Runnable{
         return mainMenu;
     }
 
+    public String getServerAddress(){
+        return JOptionPane.showInputDialog(
+                window.getFrame(),
+                "Enter IP Address of the Server:",
+                "Welcome to the game",
+                JOptionPane.QUESTION_MESSAGE);
+    }
+
+    public String getName() {
+        return JOptionPane.showInputDialog(
+                window.getFrame(),
+                "Choose a screen name:",
+                "Screen name selection",
+                JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
     public static void main(String args[]){
-        new Window(WIDTH, HEIGHT, "WatAdventure", new MainCanvas());
+        new MainCanvas();
+        //window = new Window(WIDTH, HEIGHT, "WatAdventure", new MainCanvas());
     }
 
 }

@@ -4,11 +4,8 @@ import game.MainCanvas;
 import game.entities.Player;
 import game.framework.Game;
 import game.framework.ID;
-import game.framework.MultiplayerGame;
 import packets.*;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,45 +14,42 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.UUID;
 
-public class Client implements Runnable{
+public class Client{
 
     public static final int DEFAULT = 9001;
 
+    private MainCanvas mainCanvas;
     private String host;
     private int port;
     private UUID uuid;
     private String playerName;
     private Player player;
-    //private long time;
 
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private boolean running = false;
     private EventListener listener;
-    private MultiplayerGame game;
+    private Game game;
 
-    public Client(MainCanvas mainCanvas, int port){
+    public Client(MainCanvas mainCanvas, Game game, int port){
+        this.mainCanvas = mainCanvas;
         this.port = port;
-
-        game = new MultiplayerGame(mainCanvas);
+        this.game = game;
 
     }
 
-    //connect to the client
+    //connect to the server
     public void connect(){
-        //boolean start = false;
         try{
             //get host
             host = getServerAddress();
             socket = new Socket(host, port);
-            //socket.setSoTimeout(100);
 
             //io setup
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
 
-            listener = new EventListener(game.getPlayerHandler());
+            listener = new EventListener(game.getHandler(), game.getPlayerHandler());
 
             //set player name
             while(true) {
@@ -75,7 +69,7 @@ public class Client implements Runnable{
 
             }
             //start running
-            new Thread(this).start();
+            //new Thread(this).start();
         }catch (ConnectException e){
             System.out.println("Unable to connect to the server");
         }catch (IOException e){
@@ -84,9 +78,10 @@ public class Client implements Runnable{
     }
 
     private void submitPlayer(){
+        Player tPlayer = game.getPlayerHandler().myPlayer;
         playerName = getName();
         uuid = UUID.randomUUID();
-        player = new Player(0, 0, uuid, ID.Player, playerName, game.getHandler());
+        player = new Player(tPlayer.getX(), tPlayer.getY(), uuid, ID.Player, playerName, game.getPlayerHandler(), game.getHandler());
         game.getPlayerHandler().myPlayer = player;
 
         sendObject(new ServerAddPlayerPacket(uuid, playerName, extractParameters(player)));
@@ -95,7 +90,7 @@ public class Client implements Runnable{
     //close the connection
     public void close(){
         try{
-            running = false;
+            game.quit();
 
             //tell the server that we disconnected
             ServerRemovePlayerPacket packet = new ServerRemovePlayerPacket();
@@ -119,6 +114,7 @@ public class Client implements Runnable{
         }
     }
 
+    /*
     @Override
     public void run() {
 
@@ -135,20 +131,7 @@ public class Client implements Runnable{
             lastTime = now;
 
             while (delta >= 1) {
-                //receive
-                try{
-                    Object data = in.readObject();
-                    listener.received(data);
-                }catch (ClassNotFoundException e){
-                    e.printStackTrace();
-                }catch (SocketException e){
-                    close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
 
-                //send
-                sendObject(new ServerPlayerUpdatePacket(extractParameters(player)));
                 tick();
                 delta--;
             }
@@ -160,30 +143,38 @@ public class Client implements Runnable{
         }
 
     }
+    */
 
-    private void tick(){
-        this.game.tick();
+    public void communicate(){
+        //receive
+        try{
+            Object data = in.readObject();
+            listener.received(data);
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }catch (SocketException e){
+            close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        //send
+        sendObject(new ServerPlayerUpdatePacket(extractParameters(player)));
+        //this.game.tick();
     }
 
-    private void render(){
-        this.game.render();
+    /*
+    public void render(Graphics g){
+        this.game.render(g);
     }
+    */
 
     private String getServerAddress() {
-        return JOptionPane.showInputDialog(
-                window.getFrame(),
-                "Enter IP Address of the Server:",
-                "Welcome to the game",
-                JOptionPane.QUESTION_MESSAGE);
+        return mainCanvas.getServerAddress();
     }
 
-
     private String getName() {
-        return JOptionPane.showInputDialog(
-                window.getFrame(),
-                "Choose a screen name:",
-                "Screen name selection",
-                JOptionPane.PLAIN_MESSAGE);
+        return mainCanvas.getName();
     }
 
     public static UpdateParameters extractParameters(Player player){

@@ -1,5 +1,6 @@
 package game.framework;
 
+import client.PlayerHandler;
 import game.colliders.Collider;
 import game.entities.TA;
 import game.entities.Player;
@@ -12,11 +13,12 @@ import java.util.Queue;
 
 public class CommandHandler {
 
-
     private Handler handler;
+    private PlayerHandler playerHandler;
 
-    public CommandHandler(Handler handler){
+    public CommandHandler(PlayerHandler playerHandler, Handler handler){
         this.handler = handler;
+        this.playerHandler = playerHandler;
     }
 
     public String executeCommand(Queue<String> tokens){
@@ -72,7 +74,7 @@ public class CommandHandler {
         }else if(id.equals("ELIXIR")){
             handler.addObject(new Elixir(x, y, ID.Elixir, handler));
         }else if(id.equals("MATHIANT")){
-            handler.addObject(new TA(x, y, ID.Mathiant, handler));
+            handler.addObject(new TA(x, y, ID.Mathiant, playerHandler, handler));
         } else{
             feedback = "<FAIL> Illegal Object ID, enter \'/make help\' for more information";
         }
@@ -82,7 +84,8 @@ public class CommandHandler {
 
     private String tp(float x, float y){
         String feedback = String.format("Teleported player to coordinate (%.1f, %.1f)", x, y);
-        Player tempPlayer = new Player(x, y, ID.Player, handler);
+        Player myPlayer = playerHandler.myPlayer;
+        Player tempPlayer = new Player(x, y, myPlayer.getUUID(), ID.Player, "Bob", playerHandler, handler);
         boolean success = true;
         Rectangle playerBound = new Rectangle((int)x, (int)y, tempPlayer.getWidth(), tempPlayer.getHeight());
 
@@ -94,7 +97,7 @@ public class CommandHandler {
         }
 
         if(success){
-            handler.player.setX(x); handler.player.setY(y);
+            playerHandler.myPlayer.setX(x); playerHandler.myPlayer.setY(y);
         }else{
             feedback = "<FAIL> Teleport destination is not applicable (possibly contains another object)";
         }

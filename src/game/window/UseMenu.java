@@ -98,7 +98,7 @@ public class UseMenu extends Menu {
     ButtonFunction but_equip_function =() -> {
         ItemButton tempItemButton = (ItemButton) superButtons.get(superSelectIndex);
         Item tempItem = tempItemButton.getItem();
-        game.getHandler().player.setEquippedItem(tempItem);
+        game.getPlayerHandler().myPlayer.setEquippedItem(tempItem);
         back();
 
     };
