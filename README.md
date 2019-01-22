@@ -2,7 +2,7 @@ WatAdventure
 ======
 ![Main](images/main.png)
 Run `MainCanvas.java` to start
-##Gallery
+## Gallery
 ![MeleeAttack](images/1.png)
 ![Trap](images/2.png)
 ![RangedAttack](images/3.png)
@@ -12,9 +12,9 @@ Run `MainCanvas.java` to start
 ![Save/Load](images/7.png)
 ![ItemMenu](images/8.png)
 ![Multiplayer](images/9.png)
-##Version
+## Version
 2.1.0
-##Description
+## Description
 A desktop platformer game, built entirely in Java and free of all game engines!
 
 Existing features:
@@ -25,7 +25,7 @@ Existing features:
 * Currency
 * CLI for cheaters ;)
 * **Multiplayer**
-##What's new
+## What's new
 Latest development adds multiplayer feature!
 
 The integrated local server uses `Socket` to establish communication between client and server, and implements 
