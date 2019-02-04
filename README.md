@@ -28,6 +28,6 @@ Existing features:
 ## What's new
 Latest development adds multiplayer feature!
 
-The integrated local server uses `Socket` to establish communication between client and server, and implements 
-a custom TCP/IP protocol for data transmission. Before you host a local game, make sure to get `Server.java` 
+The local server uses `Socket` to establish communication between client and server, and implements 
+a custom TCP/IP protocol for data transmission. Before you enter a local game, make sure to get `Server.java` 
 running first.
