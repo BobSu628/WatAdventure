@@ -87,9 +87,7 @@ public class MainCanvas extends Canvas implements Runnable{
             fileIn.close();
         }catch (FileNotFoundException e){
             e.printStackTrace();
-        }catch (IOException e){
-            timeStamps[index] = "(Empty)";
-        }catch (ClassNotFoundException e){
+        }catch (ClassNotFoundException|NullPointerException|IOException e){
             timeStamps[index] = "(Empty)";
         }
     }

@@ -2,7 +2,7 @@ package game.colliders;
 
 import game.entities.Entity;
 import game.framework.GameObject;
-import game.window.Handler;
+import game.framework.Handler;
 
 public class CoinCollider extends EntityCollider {
 

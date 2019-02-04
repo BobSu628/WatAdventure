@@ -3,8 +3,6 @@ package game.window;
 import game.entities.Player;
 import game.framework.Game;
 import game.framework.ID;
-import game.window.Camera;
-import game.window.Handler;
 import packets.UpdateParameters;
 
 import java.awt.*;

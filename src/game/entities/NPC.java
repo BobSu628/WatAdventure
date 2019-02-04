@@ -1,7 +1,7 @@
 package game.entities;
 
 import game.framework.ID;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 

@@ -2,7 +2,7 @@ package game.items.GarbageTest;
 
 import game.framework.ID;
 import game.items.Item;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 

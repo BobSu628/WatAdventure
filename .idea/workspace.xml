@@ -3,38 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="5e51ced2-fc6e-469e-a858-1cdb71f83525" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/client/EventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/client/EventListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/client/PlayerHandler.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/MainCanvas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/MainCanvas.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/colliders/BasicEnemyCollider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/colliders/BasicEnemyCollider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/colliders/EntityCollider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/colliders/EntityCollider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/entities/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/entities/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/entities/TA.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/entities/TA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/CommandHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/CommandHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/KeyInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/KeyInput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/LevelLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/LevelLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/window/CommandLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/window/CommandLine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/window/Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/window/Handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/window/ItemMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/window/ItemMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/window/PausedMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/window/PausedMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/window/UseMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/window/UseMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/2.save" beforeDir="false" afterPath="$PROJECT_DIR$/saves/2.save" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/3.save" beforeDir="false" afterPath="$PROJECT_DIR$/saves/3.save" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/EventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/PlayerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/window/PlayerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/SaveSlot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WatAdventure/game/framework/SaveSlot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/MainCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/MainCanvas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/colliders/BasicEnemyCollider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/colliders/BasicEnemyCollider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/colliders/EntityCollider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/colliders/EntityCollider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/colliders/PlayerCollider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/colliders/PlayerCollider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/entities/TA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/entities/TA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/framework/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/framework/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/framework/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/framework/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/framework/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/framework/KeyInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/framework/LevelLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/framework/LevelLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/objects/DestroyableBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/TrapBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/window/CommandLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/window/CommandLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/window/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/window/Handler.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -46,24 +21,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/framework/Game.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/game/MainCanvas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+            <state relative-caret-position="156">
+              <caret line="161" column="30" selection-start-line="161" selection-start-column="30" selection-end-line="161" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4430#4431#0" expanded="true" />
-                <element signature="e#4460#4461#0" expanded="true" />
-                <element signature="e#4499#4500#0" expanded="true" />
-                <element signature="e#4528#4529#0" expanded="true" />
-                <element signature="e#4578#4579#0" expanded="true" />
-                <element signature="e#4618#4619#0" expanded="true" />
-                <element signature="e#4677#4678#0" expanded="true" />
-                <element signature="e#4723#4724#0" expanded="true" />
-                <element signature="e#4779#4780#0" expanded="true" />
-                <element signature="e#4823#4824#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/window/Camera.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/framework/KeyInput.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1384">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/framework/LevelLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1098">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
             </state>
           </provider>
         </entry>
@@ -71,95 +63,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/window/Handler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
+            <state relative-caret-position="17">
+              <caret line="48" column="25" lean-forward="true" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/objects/TrapBlock.java">
+        <entry file="file://$PROJECT_DIR$/src/game/framework/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/game/MainCanvas.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="224" column="40" lean-forward="true" selection-start-line="224" selection-start-column="40" selection-end-line="224" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7161#7162#0" expanded="true" />
-                <element signature="e#7188#7189#0" expanded="true" />
-                <element signature="e#7225#7226#0" expanded="true" />
-                <element signature="e#7256#7257#0" expanded="true" />
-                <element signature="e#7927#7928#0" expanded="true" />
-                <element signature="e#7956#7957#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/window/PlayerHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/framework/SaveSlot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/EventListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/Connection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/Client.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="83" column="66" selection-start-line="83" selection-start-column="66" selection-end-line="83" selection-end-column="66" />
+            <state relative-caret-position="306">
+              <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -223,10 +137,8 @@
         <option value="$PROJECT_DIR$/src/server/Server.java" />
         <option value="$PROJECT_DIR$/src/server/Connection.java" />
         <option value="$PROJECT_DIR$/src/packets/ClientPlayerUpdatePacket.java" />
-        <option value="$PROJECT_DIR$/src/game/window/CommandLine.java" />
         <option value="$PROJECT_DIR$/src/game/window/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/client/PlayerHandler.java" />
-        <option value="$PROJECT_DIR$/src/game/framework/LevelLoader.java" />
         <option value="$PROJECT_DIR$/src/game/framework/CommandHandler.java" />
         <option value="$PROJECT_DIR$/src/game/window/UseMenu.java" />
         <option value="$PROJECT_DIR$/src/game/window/ItemMenu.java" />
@@ -234,16 +146,18 @@
         <option value="$PROJECT_DIR$/src/game/colliders/EntityCollider.java" />
         <option value="$PROJECT_DIR$/src/game/colliders/BasicEnemyCollider.java" />
         <option value="$PROJECT_DIR$/src/game/entities/TA.java" />
-        <option value="$PROJECT_DIR$/src/game/framework/KeyInput.java" />
         <option value="$PROJECT_DIR$/src/client/Client.java" />
         <option value="$PROJECT_DIR$/src/client/EventListener.java" />
-        <option value="$PROJECT_DIR$/src/game/entities/Player.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/game/MainCanvas.java" />
         <option value="$PROJECT_DIR$/src/game/framework/Game.java" />
         <option value="$PROJECT_DIR$/src/game/window/PlayerHandler.java" />
-        <option value="$PROJECT_DIR$/src/game/window/Handler.java" />
         <option value="$PROJECT_DIR$/src/game/objects/TrapBlock.java" />
+        <option value="$PROJECT_DIR$/src/game/MainCanvas.java" />
+        <option value="$PROJECT_DIR$/src/game/window/CommandLine.java" />
+        <option value="$PROJECT_DIR$/src/game/entities/Player.java" />
+        <option value="$PROJECT_DIR$/src/game/framework/KeyInput.java" />
+        <option value="$PROJECT_DIR$/src/game/framework/LevelLoader.java" />
+        <option value="$PROJECT_DIR$/src/game/window/Handler.java" />
       </list>
     </option>
   </component>
@@ -267,16 +181,6 @@
             <path>
               <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
               <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="saves" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -290,13 +194,6 @@
               <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="colliders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
@@ -317,34 +214,7 @@
               <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="items" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
               <item name="window" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WatAdventure" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WatAdventure" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -358,7 +228,7 @@
     <property name="SearchEverywhereHistoryKey" value="animation&#9;PSI&#9;JAVA://main.window.Animation#drawAnimation" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549242758063" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549244515637" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -387,7 +257,7 @@
       <module name="WatAdventure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="game.window.*" />
+          <option name="PATTERN" value="game.framework.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -413,7 +283,7 @@
       <module name="WatAdventure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="game.window.*" />
+          <option name="PATTERN" value="game.framework.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -483,13 +353,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38221000" />
+    <option name="totallyTimeSpent" value="39432000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.141258" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.141258" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -498,7 +368,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -598,27 +468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/window/BufferedImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/window/Camera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/window/CommandLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="35" column="83" lean-forward="true" selection-start-line="35" selection-start-column="83" selection-end-line="35" selection-end-column="83" />
         </state>
       </provider>
     </entry>
@@ -813,31 +662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/framework/LevelLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/framework/KeyInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="104" column="29" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
-          <folding>
-            <element signature="e#5270#5271#0" expanded="true" />
-            <element signature="e#5302#5303#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/entities/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2771">
-          <caret line="176" column="32" selection-start-line="176" selection-start-column="32" selection-end-line="176" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -906,17 +730,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/window/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/objects/TrapBlock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/window/BufferedImageLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/window/CommandLine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="158" column="5" lean-forward="true" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
+          <folding>
+            <element signature="e#3474#3475#0" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#4425#4426#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="377" lean-forward="true" selection-start-line="377" selection-end-line="377" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/window/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/framework/KeyInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1384">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/framework/LevelLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/window/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="48" column="25" lean-forward="true" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -926,32 +797,16 @@
           <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4430#4431#0" expanded="true" />
-            <element signature="e#4460#4461#0" expanded="true" />
-            <element signature="e#4499#4500#0" expanded="true" />
-            <element signature="e#4528#4529#0" expanded="true" />
-            <element signature="e#4578#4579#0" expanded="true" />
-            <element signature="e#4618#4619#0" expanded="true" />
-            <element signature="e#4677#4678#0" expanded="true" />
-            <element signature="e#4723#4724#0" expanded="true" />
-            <element signature="e#4779#4780#0" expanded="true" />
-            <element signature="e#4823#4824#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/MainCanvas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="224" column="40" lean-forward="true" selection-start-line="224" selection-start-column="40" selection-end-line="224" selection-end-column="40" />
+        <state relative-caret-position="156">
+          <caret line="161" column="30" selection-start-line="161" selection-start-column="30" selection-end-line="161" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7161#7162#0" expanded="true" />
-            <element signature="e#7188#7189#0" expanded="true" />
-            <element signature="e#7225#7226#0" expanded="true" />
-            <element signature="e#7256#7257#0" expanded="true" />
-            <element signature="e#7927#7928#0" expanded="true" />
-            <element signature="e#7956#7957#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -9,7 +9,7 @@ import game.framework.ID;
 import game.framework.Texture;
 import game.objects.Block;
 import game.window.Animation;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 import java.awt.geom.Line2D;

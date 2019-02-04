@@ -13,7 +13,7 @@ import game.items.Weapon.Weapon;
 import game.objects.Block;
 import game.objects.TrapBlock;
 import game.objects.Ladder;
-import game.window.Handler;
+import game.framework.Handler;
 
 public class PlayerCollider extends EntityCollider {
 

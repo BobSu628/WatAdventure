@@ -6,7 +6,6 @@ import game.entities.TA;
 import game.entities.Player;
 import game.items.Elixir;
 import game.objects.Block;
-import game.window.Handler;
 
 import java.awt.*;
 import java.util.Queue;

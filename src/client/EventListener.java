@@ -2,7 +2,7 @@ package client;
 
 import game.entities.Player;
 import game.framework.ID;
-import game.window.Handler;
+import game.framework.Handler;
 import game.window.PlayerHandler;
 import packets.ClientAddPlayerPacket;
 import packets.ClientPlayerUpdatePacket;

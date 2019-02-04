@@ -8,7 +8,7 @@ import game.framework.GameObject;
 import game.framework.ID;
 import game.items.Item;
 import game.items.Weapon.Weapon;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 import java.util.*;

@@ -4,7 +4,7 @@ import game.entities.Entity;
 import game.framework.GameObject;
 import game.framework.ID;
 import game.objects.Block;
-import game.window.Handler;
+import game.framework.Handler;
 
 public class EntityCollider extends Collider {
 

@@ -4,7 +4,7 @@ import game.entities.Entity;
 import game.framework.GameObject;
 import game.entities.Bullet;
 import game.objects.Block;
-import game.window.Handler;
+import game.framework.Handler;
 
 public class BulletCollider extends EntityCollider {
 

@@ -1,11 +1,7 @@
 package game.window;
 
-import game.framework.Game;
+import game.framework.*;
 import game.MainCanvas;
-import game.framework.Command;
-import game.framework.CommandArchive;
-import game.framework.CommandHandler;
-import game.framework.KeyInput;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -83,39 +79,38 @@ public class CommandLine implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //if(active) {
-            int character = e.getKeyCode();
-            if (character == COMMANDLINE_OFF) {
-                this.clearCommand();
-                this.setActive(false);
-                Game g = game;
-                KeyInput tmp = g.getKeyInput();
-                mainCanvas.addKeyListener(tmp);
-                mainCanvas.removeKeyListener(this);
-                return;
 
-            }else if (character == SUBMIT) {
-                this.submit();
-            }else if(character == DELETE){
-                try{
-                    rawCommand = rawCommand.substring(0, index-1) + rawCommand.substring(index);
-                    index --;
-                }catch (StringIndexOutOfBoundsException exc){
+        int character = e.getKeyCode();
+        if (character == COMMANDLINE_OFF) {
+            this.clearCommand();
+            this.setActive(false);
+            Game g = game;
+            KeyInput tmp = g.getKeyInput();
+            mainCanvas.addKeyListener(tmp);
+            mainCanvas.removeKeyListener(this);
+            return;
 
-                }
-            }else if(character == KeyEvent.VK_LEFT){
+        }else if (character == SUBMIT) {
+            this.submit();
+        }else if(character == DELETE){
+            try{
+                rawCommand = rawCommand.substring(0, index-1) + rawCommand.substring(index);
                 index --;
-                if(index < 0) index = 0;
+            }catch (StringIndexOutOfBoundsException exc){
 
-            }else if(character == KeyEvent.VK_RIGHT){
-                index ++;
-                if(index > rawCommand.length()) index = rawCommand.length();
-
-            }else{
-                this.rawCommand = this.rawCommand.substring(0, index) + (char)character + this.rawCommand.substring(index);
-                index ++;
             }
-        //}
+        }else if(character == KeyEvent.VK_LEFT){
+            index --;
+            if(index < 0) index = 0;
+
+        }else if(character == KeyEvent.VK_RIGHT){
+            index ++;
+            if(index > rawCommand.length()) index = rawCommand.length();
+
+        }else{
+            this.rawCommand = this.rawCommand.substring(0, index) + (char)character + this.rawCommand.substring(index);
+            index ++;
+        }
     }
 
     @Override

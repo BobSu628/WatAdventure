@@ -5,7 +5,7 @@ import game.framework.GameObject;
 import game.framework.ID;
 import game.util.ButtonFunction;
 import game.util.ItemButton;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 

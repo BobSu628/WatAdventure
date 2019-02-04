@@ -15,17 +15,6 @@ TODO fix movement switching bug
 
 public class KeyInput extends KeyAdapter {
 
-    /*
-    public static int UP = KeyEvent.VK_W;
-    public static int DOWN = KeyEvent.VK_S;
-    public static int LEFT = KeyEvent.VK_A;
-    public static int RIGHT = KeyEvent.VK_D;
-    public static int ATTACK = KeyEvent.VK_J;
-    public static int JUMP = KeyEvent.VK_SPACE;
-    public static int COMMANDLINE_ON = KeyEvent.VK_SLASH;
-    public static int MENU = KeyEvent.VK_P;
-    public static int MENU = KeyEvent.VK_BACK_SPACE;
-    */
     public static int UP = KeyEvent.VK_W;
     public static int DOWN = KeyEvent.VK_S;
     public static int LEFTWALK = KeyEvent.VK_A;
@@ -38,7 +27,7 @@ public class KeyInput extends KeyAdapter {
     public static int COMMANDLINE_ON = KeyEvent.VK_SLASH;
     public static int MENU = KeyEvent.VK_P ;
     public static int SWITCHATTACK = KeyEvent.VK_I;
-    public static int SAVE = KeyEvent.VK_F5;
+    //public static int SAVE = KeyEvent.VK_F5;
 
     private transient MainCanvas mainCanvas;
     private Game game;

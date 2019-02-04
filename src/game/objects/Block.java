@@ -4,7 +4,7 @@ import game.framework.Game;
 import game.framework.GameObject;
 import game.framework.ID;
 import game.framework.Texture;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 

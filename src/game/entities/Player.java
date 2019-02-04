@@ -2,13 +2,12 @@ package game.entities;
 
 import game.window.PlayerHandler;
 import game.framework.Game;
-import game.colliders.Collider;
 import game.colliders.PlayerCollider;
 import game.framework.ID;
 import game.framework.Texture;
 import game.objects.MeleeAttack;
 import game.window.Animation;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -33,16 +32,12 @@ public class Player extends Entity {
     private static final int WALK_X = 5;
     private static final int RUN_X = 8;
 
-    //private Set itemSet = new HashSet();
-    //private LinkedList<ItemButton> itemButtons = new LinkedList<>();
-
     private transient Texture texture;
     private transient Animation playerWalk, playerWalkLeft, playerRangeAttackRight, playerRangeAttackLeft, playerMeleeAttackRight, playerMeleeAttackLeft;
     private MeleeAttack meleeAttack = null;
     private boolean attacking = false;
     private boolean canAttack = true;
 
-    //private boolean canClimb = false;
     private boolean onLadder = false;
     private boolean isClimbing = false, canClimb = false;
     private int attackTimer = 20;
@@ -70,6 +65,7 @@ public class Player extends Entity {
         this.knockbackVelY = 8;
         this.attackState = AttackState.Ranged;
         this.jumpVel = -11;
+        //define animations for the object
         texture = Game.getInstance();
         playerWalk = new Animation(5, texture.player[1], texture.player[2], texture.player[3], texture.player[4], texture.player[5], texture.player[6]);
         playerWalkLeft = new Animation(5, texture.player[8], texture.player[9], texture.player[10], texture.player[11], texture.player[12], texture.player[13]);
@@ -78,8 +74,7 @@ public class Player extends Entity {
         playerRangeAttackRight = new Animation(5,texture.player_attack[5]);
         playerRangeAttackLeft = new Animation(5,texture.player_attack[7]);
         //collider
-        Collider c = new PlayerCollider(this);
-        this.addCollider(c);
+        this.addCollider(new PlayerCollider(this));
 
     }
 
@@ -87,6 +82,7 @@ public class Player extends Entity {
         super.reinit();
         texture = Game.getInstance();
         playerHandler = game.getPlayerHandler();
+        //redefine animations
         playerWalk = new Animation(5, texture.player[1], texture.player[2], texture.player[3], texture.player[4], texture.player[5], texture.player[6]);
         playerWalkLeft = new Animation(5, texture.player[8], texture.player[9], texture.player[10], texture.player[11], texture.player[12], texture.player[13]);
         playerMeleeAttackRight = new Animation(5,texture.player_attack[0],texture.player_attack[1]);
@@ -98,8 +94,7 @@ public class Player extends Entity {
 
     @Override
     public void destroy() {
-        //System.exit(0);
-        //handler.getGame().quit();
+
     }
 
     @Override
@@ -135,6 +130,7 @@ public class Player extends Entity {
             }
 
         }else{
+            //if in knockback, player has no control
             playerHandler.setLeftWalk(false);
             playerHandler.setRightWalk(false);
             playerHandler.setLeftRun(false);

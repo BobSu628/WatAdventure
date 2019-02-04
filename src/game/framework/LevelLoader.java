@@ -6,14 +6,13 @@ import game.items.Elixir;
 import game.items.Grenade;
 import game.items.Weapon.MechanicalPencil;
 import game.objects.*;
-import game.window.Handler;
 
 import java.awt.image.BufferedImage;
 
 public class LevelLoader {
 
     private int w, h;
-    private BufferedImage level;
+    private BufferedImage map;
     private ColorCodeTranslator cct;
     private Handler handler;
     private PlayerHandler playerHandler;
@@ -24,22 +23,21 @@ public class LevelLoader {
         this.cct = new ColorCodeTranslator();
         this.handler = handler;
         this.playerHandler = playerHandler;
-        //playerHandler.myPlayer = new Player(0, 0, UUID.randomUUID(), ID.Player, "Bob", playerHandler, handler);
     }
 
-    public void setLevel(BufferedImage level){
-        this.level = level;
+    public void setMap(BufferedImage map){
+        this.map = map;
 
-        this.w = level.getWidth();
-        this.h = level.getHeight();
-        //player = new Player(0, 0, ID.Player, handler);
+        //get the width and height of current map
+        this.w = map.getWidth();
+        this.h = map.getHeight();
 
     }
 
     public void load(){
         for(int xx = 0; xx < w; xx ++){
             for(int yy = 0; yy < h; yy ++){
-                int pixel = level.getRGB(xx, yy);
+                int pixel = map.getRGB(xx, yy);
 
                 ColorCodeTranslator.IdTypePair identifier = cct.translate(pixel);
                 if(identifier != null) {

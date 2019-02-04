@@ -1,4 +1,4 @@
-package game.window;
+package game.framework;
 //TODO move player to PlayerHandler
 
 import game.entities.Player;
@@ -6,6 +6,8 @@ import game.framework.Game;
 import game.framework.GameObject;
 import game.framework.ID;
 import game.framework.LevelLoader;
+import game.window.BufferedImageLoader;
+import game.window.Camera;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -52,7 +54,7 @@ public class Handler implements Serializable {
             level = 0;
         }
         levelLoader = new LevelLoader(this, game.getPlayerHandler());
-        levelLoader.setLevel(maps[level]);
+        levelLoader.setMap(maps[level]);
         levelLoader.load();
     }
 
@@ -72,7 +74,7 @@ public class Handler implements Serializable {
         this.game = game;
         this.camera = game.getCamera();
         levelLoader = new LevelLoader(this, game.getPlayerHandler());
-        levelLoader.setLevel(maps[level]);
+        levelLoader.setMap(maps[level]);
         //player.reinit();
         for(int i = 0; i < object.size(); i ++){
             object.get(i).reinit();
@@ -102,8 +104,8 @@ public class Handler implements Serializable {
         }
     }
 
-    public void loadImageLevel(BufferedImage image){
-        levelLoader.setLevel(image);
+    public void loadMap(BufferedImage map){
+        levelLoader.setMap(map);
         levelLoader.load();
 
     }
@@ -122,7 +124,7 @@ public class Handler implements Serializable {
         if(level == maps.length){
             this.game.quit();
         }else{
-            this.loadImageLevel(maps[level]);
+            this.loadMap(maps[level]);
         }
 
     }

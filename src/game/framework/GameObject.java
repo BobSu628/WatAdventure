@@ -1,7 +1,5 @@
 package game.framework;
 
-import game.window.Handler;
-
 import java.awt.*;
 import java.io.Serializable;
 

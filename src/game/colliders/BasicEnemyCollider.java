@@ -6,7 +6,7 @@ import game.entities.TA;
 import game.entities.Player;
 import game.framework.GameObject;
 import game.objects.Block;
-import game.window.Handler;
+import game.framework.Handler;
 
 public class BasicEnemyCollider extends EntityCollider{
 

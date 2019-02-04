@@ -2,7 +2,7 @@ package game.objects;
 
 import game.framework.GameObject;
 import game.framework.ID;
-import game.window.Handler;
+import game.framework.Handler;
 
 import java.awt.*;
 
