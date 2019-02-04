@@ -1,5 +1,5 @@
 package game.framework;
-import client.PlayerHandler;
+import game.window.PlayerHandler;
 import game.MainCanvas;
 import game.window.*;
 import packets.UpdateParameters;
@@ -18,15 +18,15 @@ public class Game implements Serializable {
     public static int HEIGHT = 960;
 
     private transient MainCanvas mainCanvas;
-    private Handler handler;
-    private PlayerHandler playerHandler;
+    private Handler handler; //handler of all game objects except player objects
+    private PlayerHandler playerHandler; //handler of player objects
     private Camera camera;
-    private transient KeyInput keyInput;
-    private transient CommandLine commandLine;
+    private transient KeyInput keyInput; //keyboard input for the game
+    private transient CommandLine commandLine; //embedded CLI
     private transient PausedMenu pausedMenu;
     private transient static Texture texture;
     //private int level;
-    private char type;
+    private char type; //'s' for single player, 'm' for multi player
     public boolean paused;
 
     public Game(MainCanvas mainCanvas, char type){
@@ -61,10 +61,12 @@ public class Game implements Serializable {
 
     public void tick() {
         if(!paused) {
+            //if current game is multiplayer, never pause the game
+            //if current game is singleplayer, pause the game when pausedmenu is active
             if (type == 'm' || !pausedMenu.isActive()) {
-                handler.tick();
-                playerHandler.tick();
-                camera.tick(playerHandler.myPlayer);
+                handler.tick(); //update all game objects
+                playerHandler.tick(); //update all player objects
+                camera.tick(playerHandler.myPlayer); //update camera
             }
             if (pausedMenu.isActive()) {
                 pausedMenu.tick();
@@ -93,6 +95,7 @@ public class Game implements Serializable {
     }
 
     public void quit(){
+        //go back to main menu
         mainCanvas.getMainMenu().setDisplay(true);
         mainCanvas.getMainMenu().getLoadMenu().setActive(false);
         mainCanvas.getMainMenu().getLoadMenu().setDisplay(false);
@@ -128,12 +131,6 @@ public class Game implements Serializable {
         return handler;
     }
 
-    /*
-    public int getLevel() {
-        return level;
-    }
-    */
-
     public Camera getCamera() {
         return camera;
     }
@@ -149,11 +146,5 @@ public class Game implements Serializable {
     public void setPausedMenu(PausedMenu pausedMenu) {
         this.pausedMenu = pausedMenu;
     }
-
-    /*
-    public void incrementLevel(){
-        this.level ++;
-    }
-    */
 }
 

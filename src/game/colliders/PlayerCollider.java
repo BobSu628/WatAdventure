@@ -11,7 +11,7 @@ import game.items.Grenade;
 import game.items.Item;
 import game.items.Weapon.Weapon;
 import game.objects.Block;
-import game.objects.DestroyableBlock;
+import game.objects.TrapBlock;
 import game.objects.Ladder;
 import game.window.Handler;
 
@@ -54,7 +54,7 @@ public class PlayerCollider extends EntityCollider {
             } else if(tempObject.getId() == ID.MechanicalPencil){
                 this.collideWeapon((Weapon) tempObject);
             }else if(tempObject.getId() == ID.DestroyableBlock){
-                this.collideDestroyableBlock((DestroyableBlock) tempObject);
+                this.collideDestroyableBlock((TrapBlock) tempObject);
             }else if(tempObject.getId() == ID.Ladder){
                 this.collideLadder((Ladder) tempObject);
             }
@@ -91,13 +91,13 @@ public class PlayerCollider extends EntityCollider {
         }
     }
 
-    private void collideDestroyableBlock(DestroyableBlock destroyableBlock){
-        if(player.getBounds().intersects(destroyableBlock.getBounds())){
-            if(!destroyableBlock.isActive()){
-                destroyableBlock.setActive(true);
+    private void collideDestroyableBlock(TrapBlock trapBlock){
+        if(player.getBounds().intersects(trapBlock.getBounds())){
+            if(!trapBlock.isActive()){
+                trapBlock.setActive(true);
             }
         }
-        collideBlock(destroyableBlock);
+        collideBlock(trapBlock);
     }
 
     private void collideLadder(Ladder ladder){

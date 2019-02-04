@@ -1,8 +1,7 @@
 package game.framework;
 
-import client.PlayerHandler;
+import game.window.PlayerHandler;
 import game.entities.TA;
-import game.entities.Player;
 import game.items.Elixir;
 import game.items.Grenade;
 import game.items.Weapon.MechanicalPencil;
@@ -10,7 +9,6 @@ import game.objects.*;
 import game.window.Handler;
 
 import java.awt.image.BufferedImage;
-import java.util.UUID;
 
 public class LevelLoader {
 
@@ -63,7 +61,7 @@ public class LevelLoader {
                     } else if (identifier.id == ID.MechanicalPencil){
                         handler.addObject((new MechanicalPencil(displayX,displayY,ID.MechanicalPencil,handler,1000,1000, 1,2)));
                     } else if(identifier.id == ID.DestroyableBlock){
-                        handler.addObject(new DestroyableBlock(displayX, displayY, identifier.type, ID.DestroyableBlock, handler));
+                        handler.addObject(new TrapBlock(displayX, displayY, identifier.type, ID.DestroyableBlock, handler));
                     }else if(identifier.id == ID.Ladder){
                         handler.addObject(new Ladder(displayX, displayY, ID.Ladder, handler));
                     }

@@ -5,13 +5,13 @@ import game.window.Handler;
 
 import java.awt.*;
 
-public class DestroyableBlock extends Block {
+public class TrapBlock extends Block {
 
     private float velY;
     private boolean active = false, falling = false;
     private int timer = 30;
 
-    public DestroyableBlock(float x, float y, int type, ID id, Handler handler) {
+    public TrapBlock(float x, float y, int type, ID id, Handler handler) {
         super(x, y, type, id, handler);
     }
 

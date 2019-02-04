@@ -26,7 +26,7 @@ public class MainCanvas extends Canvas implements Runnable{
     private Client client;
     private Game game;
 
-    public enum STATE{
+    public enum STATE{ // game state
         MainMenu(),
         Game(),
         Multiplayer(),
@@ -49,6 +49,7 @@ public class MainCanvas extends Canvas implements Runnable{
         timeStamps = new String[4];
         initTimeStamps();
         mainMenu = new MainMenu(this,null,mainX,mainY,mainWidth,mainHeight);
+        //TODO use one KeyListener throughout the program
         this.addKeyListener(mainMenu);
 
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -68,6 +69,10 @@ public class MainCanvas extends Canvas implements Runnable{
     }
 
     private void loadSaveFile(int index, File[] saveFiles){
+        /*
+        if save file exists, store its timestamp into its index
+        else, store "(Empty)" into its index
+         */
         try{
             FileInputStream fileIn = new FileInputStream("saves/"+saveFiles[index-1].getName());
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -142,16 +147,20 @@ public class MainCanvas extends Canvas implements Runnable{
     }
 
     private void render(){
+        //create a 3 buffer strategy
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
             this.createBufferStrategy(3);
             return;
         }
+        //get graphics object
         Graphics g = bs.getDrawGraphics();
 
         /////////////////////
+        //Draw Graphics
 
         if(state == STATE.MainMenu){
+            //render main menu
             g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
             g.setColor(Color.YELLOW);
             g.setFont(font);
@@ -162,9 +171,11 @@ public class MainCanvas extends Canvas implements Runnable{
         }else if(state == STATE.Multiplayer){
             this.game.render(g);
         }
+        //Display FPS and ticks
         g.setColor(Color.white);
         g.drawString("FPS: " + frameCount, 20, 20);
         g.drawString("TICKS: " + updateCount, 20, 40);
+
         /////////////////////
 
         g.dispose();
@@ -174,7 +185,7 @@ public class MainCanvas extends Canvas implements Runnable{
 
     public void startNewGame(){
         this.game = new Game(this, 's');
-        this.addKeyListener(game.getKeyInput());
+        this.addKeyListener(game.getKeyInput()); //switch key input
         this.removeKeyListener(mainMenu);
         state = STATE.Game;
     }
@@ -189,13 +200,13 @@ public class MainCanvas extends Canvas implements Runnable{
     }
 
     public void saveGame(String timeStamp, int id) {
-        //UUID uuid = UUID.randomUUID();
+        //TODO use a stabler method to write object (e.g. JSON)
+
         try{
             FileOutputStream fileOut = new FileOutputStream("saves/"+id+".save");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            SaveSlot ss = new SaveSlot(timeStamp, this.game);
-            timeStamps[id] = timeStamp;
-            //System.out.println(timeStamps[id]);
+            SaveSlot ss = new SaveSlot(timeStamp, this.game); //serializable container for Game
+            timeStamps[id] = timeStamp; //store timestamp in its corresponding index
             out.writeObject(ss);
             out.close();
             fileOut.close();
@@ -207,13 +218,13 @@ public class MainCanvas extends Canvas implements Runnable{
 
     public void loadGame(int id){
         try{
-            this.removeKeyListener(mainMenu.getLoadMenu());
-            FileInputStream fileIn = new FileInputStream("saves/"+id+".save");
+            this.removeKeyListener(mainMenu.getLoadMenu()); //switch key listener
+            FileInputStream fileIn = new FileInputStream("saves/"+id+".save"); //
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            SaveSlot slot = (SaveSlot) in.readObject();
+            SaveSlot slot = (SaveSlot) in.readObject(); //read save file into object container
             Game loadedGame = slot.game;
-            loadedGame.reinit(this);
-            this.addKeyListener(loadedGame.getKeyInput());
+            loadedGame.reinit(this); //reinitialize non-serializable instances
+            this.addKeyListener(loadedGame.getKeyInput()); //add the keylistener of current game session
             this.game = loadedGame;
             in.close();
             fileIn.close();
@@ -221,7 +232,7 @@ public class MainCanvas extends Canvas implements Runnable{
         }catch (IOException e){
             e.printStackTrace();
         }catch (ClassNotFoundException e){
-            System.err.println("No such save found");
+            System.err.println("Save file does not exist");
             e.printStackTrace();
 
         }
@@ -235,6 +246,7 @@ public class MainCanvas extends Canvas implements Runnable{
         return mainMenu;
     }
 
+    //Opens an InputDialog that asks user to enter IP address of server
     public String getServerAddress(){
         return JOptionPane.showInputDialog(
                 window.getFrame(),
@@ -243,6 +255,7 @@ public class MainCanvas extends Canvas implements Runnable{
                 JOptionPane.QUESTION_MESSAGE);
     }
 
+    //Opens an InputDialog that asks user to enter screen name
     public String getName() {
         return JOptionPane.showInputDialog(
                 window.getFrame(),
