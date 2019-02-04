@@ -1,6 +1,6 @@
 package game.entities;
 
-import client.PlayerHandler;
+import game.window.PlayerHandler;
 import game.colliders.BasicEnemyCollider;
 import game.colliders.Collider;
 import game.framework.Game;

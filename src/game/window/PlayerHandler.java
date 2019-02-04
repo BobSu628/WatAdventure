@@ -1,4 +1,4 @@
-package client;
+package game.window;
 
 import game.entities.Player;
 import game.framework.Game;
@@ -34,13 +34,10 @@ public class PlayerHandler implements Serializable {
 
     public void tick() {
         myPlayer.tick();
-        //System.out.println(myPlayer.getX()+", "+myPlayer.getY());
-        /*for (Map.Entry<UUID, NetPlayer> entry : players.entrySet()) {
-            entry.getValue().tick();
-        }*/
 
     }
 
+    //Update parameters of a Player according to received ClientPlayerUpdatePacket
     public void updatePlayer(UUID uuid, UpdateParameters parameters){
         Player player = players.get(uuid);
         player.setX(parameters.x);
@@ -55,6 +52,7 @@ public class PlayerHandler implements Serializable {
 
     }
 
+    //initialze other players when current player joins the game
     public void initOtherPlayers(HashMap<UUID, UpdateParameters> players, HashMap<UUID, String> names){
         for(Map.Entry<UUID, UpdateParameters> entry: players.entrySet()){
 
@@ -74,6 +72,8 @@ public class PlayerHandler implements Serializable {
         players.remove(uuid);
     }
 
+    ///////////////////
+    //player movement parameters
     public boolean isLeftWalk() {
         return leftWalk;
     }
@@ -105,5 +105,5 @@ public class PlayerHandler implements Serializable {
     public void setRightRun(boolean rightRun) {
         this.rightRun = rightRun;
     }
-
+    ///////////////////
 }

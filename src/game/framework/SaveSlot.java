@@ -3,6 +3,7 @@ package game.framework;
 import java.io.Serializable;
 
 public class SaveSlot implements Serializable {
+    //serializable object used to make a save file
     public String timeStamp;
     public Game game;
 

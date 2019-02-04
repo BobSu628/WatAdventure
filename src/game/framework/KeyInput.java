@@ -1,9 +1,8 @@
 package game.framework;
 
-import client.PlayerHandler;
+import game.window.PlayerHandler;
 import game.MainCanvas;
 import game.entities.Player;
-import game.window.Handler;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
