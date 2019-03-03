@@ -68,6 +68,25 @@ public class Server implements Runnable{
         }
     }
 
+    public static UpdateParameters extractParameters(PlayerData player){
+        return new UpdateParameters(player.getX(),
+                                    player.getY(),
+                                    player.getFacing(),
+                                    player.isLeftMoving(),
+                                    player.isRightMoving(),
+                                    player.isJumping());
+    }
+
+    public static void update(PlayerData player, UpdateParameters parameters){
+        player.setX(parameters.x);
+        player.setY(parameters.y);
+        player.setFacing(parameters.facing);
+        player.setLeftMoving(parameters.leftMoving);
+        player.setRightMoving(parameters.rightMoving);
+        player.setJumping(parameters.jumping);
+
+    }
+
     public static void main(String[] args) {
         int portNumber = PORT;
         new Server(portNumber).start();

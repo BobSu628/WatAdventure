@@ -60,17 +60,6 @@ public class Connection implements Runnable {
 
             while(socket.isConnected()){
 
-                /*
-                //send
-                //sendObject(out, new ClientPlayerUpdatePacket(Server.players));
-                for(Map.Entry<UUID, UpdateParameters> entry: Server.players.entrySet()){
-                    sendObject(out, new ClientPlayerUpdatePacket(entry.getKey(), entry.getValue()));
-                    System.out.print(entry.getValue().x+", "+entry.getValue().y + "  ");
-                }
-                System.out.println();
-                //System.out.println(Server.players.get(uuid).x+", "+Server.players.get(uuid).y);
-                */
-
                 //receive
                 try{
                     Object data = in.readObject();
@@ -80,11 +69,7 @@ public class Connection implements Runnable {
 
                         ServerPlayerUpdatePacket playerPacket = ((ServerPlayerUpdatePacket) data);
                         parameters = playerPacket.parameters;
-                        this.update(parameters);
-                        //Server.players.put(uuid, parameters);
-
-                        //broadcast(new ClientPlayerUpdatePacket(uuid, parameters));
-                        //System.out.println(Server.players.get(uuid).x+", "+Server.players.get(uuid).y);
+                        Server.update(this.playerData, parameters);
                     }
 
                 }catch (ClassNotFoundException e){
@@ -116,11 +101,6 @@ public class Connection implements Runnable {
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    private void update(UpdateParameters parameters){
-        this.playerData.setX(parameters.x);
-        this.playerData.setY(parameters.y);
     }
 
     public void sendObject(ObjectOutputStream out, Object packet){

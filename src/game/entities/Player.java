@@ -52,7 +52,7 @@ public class Player extends Entity {
     private boolean attacking = false;
     private boolean canAttack = true;
 
-    private boolean leftWalking, rightWalking, leftRunning, rightRunning;
+    private boolean leftWalking, rightWalking, leftRunning, rightRunning, leftMoving, rightMoving;
     private boolean onLadder = false;
     private boolean isClimbing = false, canClimb = false;
     private int attackTimer = 20;
@@ -185,7 +185,7 @@ public class Player extends Entity {
 
         if(jumping){
             if (meleeAttacking || rangeAttacking){
-                attackAnimation(g);
+                runAttackAnimation(g);
             }
             else if(facing == 1) g.drawImage(texture.player_jump[0], (int)x, (int)y, width, height, null);
             else g.drawImage(texture.player_jump[1], (int)x, (int)y, width, height, null);
@@ -205,9 +205,9 @@ public class Player extends Entity {
                     playerRangeAttackLeft.drawAnimation(g, (int) x, (int) y, width, height);
                 }
             }
-            else if(rightRunning || rightWalking) {
+            else if(rightMoving) {
                 playerWalk.drawAnimation(g, (int) x, (int) y, width, height);
-            }else if(leftWalking || leftRunning){
+            }else if(leftMoving){
                 playerWalkLeft.drawAnimation(g, (int)x, (int)y, width, height);
 
             } else {
@@ -330,7 +330,7 @@ public class Player extends Entity {
         else if(attackState == AttackState.Ranged) attackState = AttackState.Melee;
     }
 
-    public void attackAnimation (Graphics g){
+    public void runAttackAnimation (Graphics g){
         if (meleeAttacking) {
             if (facing == 1) {
                 playerMeleeAttackRight.drawAnimation(g, (int) x, (int) y, width, height);
@@ -380,17 +380,29 @@ public class Player extends Entity {
 
     public void setLeftWalking(boolean leftWalking) {
         this.leftWalking = leftWalking;
+        this.leftMoving = leftWalking;
     }
 
     public void setRightWalking(boolean rightWalking) {
         this.rightWalking = rightWalking;
+        this.rightMoving = rightWalking;
     }
 
     public void setLeftRunning(boolean leftRunning) {
         this.leftRunning = leftRunning;
+        this.leftMoving = leftRunning;
     }
 
     public void setRightRunning(boolean rightRunning) {
         this.rightRunning = rightRunning;
+        this.rightMoving = rightRunning;
+    }
+
+    public boolean isLeftMoving(){
+        return this.leftMoving;
+    }
+
+    public boolean isRightMoving(){
+        return this.rightMoving;
     }
 }

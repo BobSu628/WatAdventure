@@ -1,9 +1,11 @@
 package client;
 
 import game.MainCanvas;
+import game.entities.NetPlayer;
 import game.entities.Player;
 import game.framework.Game;
 import game.framework.ID;
+import game.framework.PlayerHandler;
 import packets.*;
 
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class Client{
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private EventListener listener;
+    private SyncListener listener;
     private Game game;
 
     public Client(MainCanvas mainCanvas, Game game, int port){
@@ -49,7 +51,7 @@ public class Client{
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
 
-            listener = new EventListener(game.getHandler(), game.getPlayerHandler());
+            listener = new SyncListener(game.getHandler(), game.getPlayerHandler());
 
             //set player name
             while(true) {
@@ -108,42 +110,10 @@ public class Client{
     public void sendObject(Object packet){
         try{
             out.writeObject(packet);
-            //out.flush();
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-
-    /*
-    @Override
-    public void run() {
-
-        long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
-        double ns = 1000000000 / amountOfTicks;
-        double delta = 0;
-        running = true;
-
-        while (running){
-            //int frames = 0;
-            long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
-            lastTime = now;
-
-            while (delta >= 1) {
-
-                tick();
-                delta--;
-            }
-
-            if (running) {
-                render();
-                //System.out.println("ok");
-            }
-        }
-
-    }
-    */
 
     public void communicate(){
         //receive
@@ -160,14 +130,7 @@ public class Client{
 
         //send
         sendObject(new ServerPlayerUpdatePacket(extractParameters(player)));
-        //this.game.tick();
     }
-
-    /*
-    public void render(Graphics g){
-        this.game.render(g);
-    }
-    */
 
     private String getServerAddress() {
         return mainCanvas.getServerAddress();
@@ -177,8 +140,25 @@ public class Client{
         return mainCanvas.getName();
     }
 
+    //Extract the to-be-uploaded parameters from a Player
     public static UpdateParameters extractParameters(Player player){
-        return new UpdateParameters(player.getX(), player.getY());
+        return new UpdateParameters(player.getX(),
+                                    player.getY(),
+                                    player.getFacing(),
+                                    player.isLeftMoving(),
+                                    player.isRightMoving(),
+                                    player.isJumping());
+    }
+
+    //Update parameters of a NetPlayer according to received ClientPlayerUpdatePacket
+    public static void updatePlayer(PlayerHandler playerHandler, UUID uuid, UpdateParameters parameters){
+        NetPlayer player = playerHandler.players.get(uuid);
+        player.setX(parameters.x);
+        player.setY(parameters.y);
+        player.setFacing(parameters.facing);
+        player.setLeftMoving(parameters.leftMoving);
+        player.setRightMoving(parameters.rightMoving);
+        player.setJumping(parameters.jumping);
     }
 
 

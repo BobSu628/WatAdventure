@@ -11,12 +11,12 @@ import packets.ClientRemovePlayerPacket;
 
 import java.util.UUID;
 
-public class EventListener {
+public class SyncListener {
 
     public Handler handler;
     public PlayerHandler playerHandler;
 
-    public EventListener(Handler handler, PlayerHandler playerHandler){
+    public SyncListener(Handler handler, PlayerHandler playerHandler){
         this.handler = handler;
         this.playerHandler = playerHandler;
     }
@@ -40,7 +40,7 @@ public class EventListener {
             //System.out.println(packet.players.keySet().size());
             for(UUID id: packet.players.keySet()){
                 if(!id.equals(playerHandler.myPlayer.getUUID())) {
-                    playerHandler.updatePlayer(id, packet.players.get(id));
+                    Client.updatePlayer(playerHandler, id, packet.players.get(id));
                 }
             }
         }

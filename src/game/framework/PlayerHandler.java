@@ -31,14 +31,9 @@ public class PlayerHandler implements Serializable {
 
     public void tick() {
         myPlayer.tick();
-
-    }
-
-    //Update parameters of a Player according to received ClientPlayerUpdatePacket
-    public void updatePlayer(UUID uuid, UpdateParameters parameters){
-        NetPlayer player = players.get(uuid);
-        player.setX(parameters.x);
-        player.setY(parameters.y);
+        for(NetPlayer player: players.values()){
+            player.tick();
+        }
     }
 
     public void render(Graphics g) {

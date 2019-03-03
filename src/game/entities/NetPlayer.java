@@ -24,10 +24,9 @@ public class NetPlayer extends Entity {
     private transient Animation playerWalk, playerWalkLeft, playerRangeAttackRight, playerRangeAttackLeft, playerMeleeAttackRight, playerMeleeAttackLeft;
     //private AnimationState animState = AnimationState.Idle_right;
     private MeleeAttack meleeAttack = null;
-    private boolean prevAttacking = false;
     private boolean attacking = false;
 
-    private boolean moving = false;
+    private boolean leftMoving = false, rightMoving = false;
     private boolean onLadder = false;
     private boolean isClimbing = false;
     //private int attackTimer = 20;
@@ -58,11 +57,10 @@ public class NetPlayer extends Entity {
         playerMeleeAttackLeft = new Animation(5,texture.player_attack[2],texture.player_attack[3]);
         playerRangeAttackRight = new Animation(5,texture.player_attack[5]);
         playerRangeAttackLeft = new Animation(5,texture.player_attack[7]);
-        //collider
-        this.addCollider(new PlayerCollider(this));
 
     }
 
+    /*
     public void reinit(Game game){
         super.reinit();
         texture = Game.getInstance();
@@ -75,6 +73,7 @@ public class NetPlayer extends Entity {
         playerRangeAttackLeft = new Animation(5,texture.player_attack[6],texture.player_attack[7]);
         random = new Random();
     }
+    */
 
     @Override
     public void destroy() {
@@ -83,8 +82,7 @@ public class NetPlayer extends Entity {
 
     @Override
     public void tick() {
-        super.tick();
-
+        /*
         //attack
         if(this.attacking) {
             if(facing == 1) {
@@ -99,6 +97,7 @@ public class NetPlayer extends Entity {
             this.meleeAttack = null;
         }
         prevAttacking = attacking;
+        */
 
         //animation
         playerWalk.runAnimation();
@@ -143,14 +142,13 @@ public class NetPlayer extends Entity {
                     playerRangeAttackLeft.drawAnimation(g, (int) x, (int) y, width, height);
                 }
             }
-            else if(moving) {
-                if(facing == 1) {
-                    playerWalk.drawAnimation(g, (int) x, (int) y, width, height);
-                }
-                else {
-                    playerWalkLeft.drawAnimation(g, (int) x, (int) y, width, height);
-                }
-            } else {
+            else if(rightMoving) {
+                playerWalk.drawAnimation(g, (int) x, (int) y, width, height);
+            }
+            else if(leftMoving) {
+                playerWalkLeft.drawAnimation(g, (int) x, (int) y, width, height);
+            }
+            else {
                 if(facing == 1) {
                     g.drawImage(texture.player[0], (int) x, (int) y, width, height, null);
                 }else{
@@ -300,7 +298,11 @@ public class NetPlayer extends Entity {
         this.name = name;
     }
 
-    public void setMoving(boolean moving) {
-        this.moving = moving;
+    public void setLeftMoving(boolean leftMoving) {
+        this.leftMoving = leftMoving;
+    }
+
+    public void setRightMoving(boolean rightMoving) {
+        this.rightMoving = rightMoving;
     }
 }

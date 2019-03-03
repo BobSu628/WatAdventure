@@ -63,7 +63,7 @@ public class Sender implements Runnable{
         //pack update data of all players into output
         for(UUID id: players.keySet()){
             PlayerData player = players.get(id);
-            UpdateParameters parameters = player.extractParameters();
+            UpdateParameters parameters = Server.extractParameters(player);
             output.addPlayer(id, parameters);
 
         }
@@ -92,7 +92,7 @@ public class Sender implements Runnable{
         HashMap<UUID, UpdateParameters> ret = new HashMap<>();
         for(UUID id: players.keySet()){
             if(!id.equals(uuid)){
-                ret.put(id, players.get(id).extractParameters());
+                ret.put(id, Server.extractParameters(players.get(id)));
             }
         }
         return ret;

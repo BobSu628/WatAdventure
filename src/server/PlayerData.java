@@ -9,6 +9,9 @@ import java.util.UUID;
 public class PlayerData {
     private ObjectOutputStream out;
     private float x, y;
+    private int facing;
+    private boolean isLeftMoving, isRightMoving, jumping;
+
     private UUID uuid;
     private String name;
 
@@ -21,10 +24,6 @@ public class PlayerData {
 
     public void send(Object packet) throws IOException {
         this.out.writeObject(packet);
-    }
-
-    public UpdateParameters extractParameters(){
-        return new UpdateParameters(this.x, this.y);
     }
 
     public float getX() {
@@ -57,5 +56,37 @@ public class PlayerData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getFacing() {
+        return facing;
+    }
+
+    public void setFacing(int facing) {
+        this.facing = facing;
+    }
+
+    public boolean isLeftMoving() {
+        return isLeftMoving;
+    }
+
+    public void setLeftMoving(boolean leftMoving) {
+        isLeftMoving = leftMoving;
+    }
+
+    public boolean isRightMoving() {
+        return isRightMoving;
+    }
+
+    public void setRightMoving(boolean rightMoving) {
+        isRightMoving = rightMoving;
+    }
+
+    public boolean isJumping() {
+        return jumping;
+    }
+
+    public void setJumping(boolean jumping) {
+        this.jumping = jumping;
     }
 }
