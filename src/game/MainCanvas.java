@@ -232,7 +232,6 @@ public class MainCanvas extends Canvas implements Runnable{
         }catch (ClassNotFoundException e){
             System.err.println("Save file does not exist");
             e.printStackTrace();
-
         }
     }
 

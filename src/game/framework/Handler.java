@@ -47,7 +47,7 @@ public class Handler implements Serializable {
         }
         */
         //initialize a player for single player or a placeholder player for multi player
-        game.getPlayerHandler().myPlayer = new Player(0, 0, UUID.randomUUID(), ID.Player, "Bob", game.getPlayerHandler(), this);
+        game.getPlayerHandler().myPlayer = new Player(0, 0, UUID.randomUUID(), ID.Player, "Bob", this);
         if(type == 's') {
             level = 1;
         }else if(type == 'm'){

@@ -81,7 +81,7 @@ public class Client{
         Player tPlayer = game.getPlayerHandler().myPlayer;
         playerName = getName();
         uuid = UUID.randomUUID();
-        player = new Player(tPlayer.getX(), tPlayer.getY(), uuid, ID.Player, playerName, game.getPlayerHandler(), game.getHandler());
+        player = new Player(tPlayer.getX(), tPlayer.getY(), uuid, ID.Player, playerName, game.getHandler());
         game.getPlayerHandler().myPlayer = player;
 
         sendObject(new ServerAddPlayerPacket(uuid, playerName, extractParameters(player)));

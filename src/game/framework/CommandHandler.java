@@ -1,6 +1,5 @@
 package game.framework;
 
-import game.window.PlayerHandler;
 import game.colliders.Collider;
 import game.entities.TA;
 import game.entities.Player;
@@ -84,7 +83,7 @@ public class CommandHandler {
     private String tp(float x, float y){
         String feedback = String.format("Teleported player to coordinate (%.1f, %.1f)", x, y);
         Player myPlayer = playerHandler.myPlayer;
-        Player tempPlayer = new Player(x, y, myPlayer.getUUID(), ID.Player, "Bob", playerHandler, handler);
+        Player tempPlayer = new Player(x, y, myPlayer.getUUID(), ID.Player, "Bob", handler);
         boolean success = true;
         Rectangle playerBound = new Rectangle((int)x, (int)y, tempPlayer.getWidth(), tempPlayer.getHeight());
 

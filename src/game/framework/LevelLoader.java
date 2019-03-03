@@ -1,6 +1,5 @@
 package game.framework;
 
-import game.window.PlayerHandler;
 import game.entities.TA;
 import game.items.Elixir;
 import game.items.Grenade;

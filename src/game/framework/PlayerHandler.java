@@ -1,5 +1,6 @@
-package game.window;
+package game.framework;
 
+import game.entities.NetPlayer;
 import game.entities.Player;
 import game.framework.Game;
 import game.framework.ID;
@@ -15,9 +16,7 @@ public class PlayerHandler implements Serializable {
 
     private transient Game game;
     public Player myPlayer;
-    public transient HashMap<UUID, Player> players = new HashMap<>();
-
-    private transient boolean leftWalk, rightWalk, leftRun, rightRun;
+    public transient HashMap<UUID, NetPlayer> players = new HashMap<>();
 
     public PlayerHandler(Game game){
         this.game = game;
@@ -37,15 +36,15 @@ public class PlayerHandler implements Serializable {
 
     //Update parameters of a Player according to received ClientPlayerUpdatePacket
     public void updatePlayer(UUID uuid, UpdateParameters parameters){
-        Player player = players.get(uuid);
+        NetPlayer player = players.get(uuid);
         player.setX(parameters.x);
         player.setY(parameters.y);
     }
 
     public void render(Graphics g) {
         myPlayer.render(g);
-        for (Map.Entry<UUID, Player> entry : players.entrySet()) {
-            entry.getValue().render(g);
+        for (NetPlayer player : players.values()) {
+            player.render(g);
         }
 
     }
@@ -56,13 +55,13 @@ public class PlayerHandler implements Serializable {
 
             UUID uuid = entry.getKey();
             UpdateParameters parameters = entry.getValue();
-            Player player = new Player(parameters.x, parameters.y, uuid, ID.Player, names.get(uuid), this, game.getHandler());
+            NetPlayer player = new NetPlayer(parameters.x, parameters.y, uuid, ID.Player, names.get(uuid), game.getHandler());
             //updatePlayer(player, parameters);
             this.addPlayer(player);
         }
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(NetPlayer player) {
         players.put(player.getUUID(), player);
     }
 
@@ -71,37 +70,22 @@ public class PlayerHandler implements Serializable {
     }
 
     ///////////////////
-    //player movement parameters
-    public boolean isLeftWalk() {
-        return leftWalk;
+    //set player movement flags
+
+    public void setLeftWalk(boolean leftWalking) {
+        myPlayer.setLeftWalking(leftWalking);
     }
 
-    public void setLeftWalk(boolean leftWalk) {
-        this.leftWalk = leftWalk;
+    public void setRightWalk(boolean rightWalking) {
+        myPlayer.setRightWalking(rightWalking);
     }
 
-    public boolean isRightWalk() {
-        return rightWalk;
+    public void setLeftRun(boolean leftRunning) {
+        myPlayer.setLeftRunning(leftRunning);
     }
 
-    public void setRightWalk(boolean rightWalk) {
-        this.rightWalk = rightWalk;
-    }
-
-    public boolean isLeftRun() {
-        return leftRun;
-    }
-
-    public void setLeftRun(boolean leftRun) {
-        this.leftRun = leftRun;
-    }
-
-    public boolean isRightRun() {
-        return rightRun;
-    }
-
-    public void setRightRun(boolean rightRun) {
-        this.rightRun = rightRun;
+    public void setRightRun(boolean rightRunning) {
+        myPlayer.setRightRunning(rightRunning);
     }
     ///////////////////
 }

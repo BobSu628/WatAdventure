@@ -50,11 +50,12 @@ public class LoadMenu extends Menu {
         int key = e.getKeyCode();
         if (key == ENTER){
 
-            this.display = false;
-            this.active = false;
-            mainCanvas.getMainMenu().setDisplay(true);
-            buttons.get(selectIndex).getButtonFunction().Function();
-
+            boolean loaded = buttons.get(selectIndex).getButtonFunction().Function();
+            if(loaded) {
+                this.display = false;
+                this.active = false;
+                mainCanvas.getMainMenu().setDisplay(true);
+            }
         }
 
         if (key == BACK){

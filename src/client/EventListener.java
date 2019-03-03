@@ -1,9 +1,10 @@
 package client;
 
+import game.entities.NetPlayer;
 import game.entities.Player;
 import game.framework.ID;
 import game.framework.Handler;
-import game.window.PlayerHandler;
+import game.framework.PlayerHandler;
 import packets.ClientAddPlayerPacket;
 import packets.ClientPlayerUpdatePacket;
 import packets.ClientRemovePlayerPacket;
@@ -24,7 +25,7 @@ public class EventListener {
         // another player joined
         if(p instanceof ClientAddPlayerPacket){
             ClientAddPlayerPacket packet = (ClientAddPlayerPacket) p;
-            playerHandler.addPlayer(new Player(0, 0, packet.uuid, ID.Player, packet.name, playerHandler, handler));
+            playerHandler.addPlayer(new NetPlayer(0, 0, packet.uuid, ID.Player, packet.name, handler));
             System.out.println(packet.name + " has joined the game");
         }
         // another player left

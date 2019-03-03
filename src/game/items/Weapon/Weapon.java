@@ -13,7 +13,7 @@ public abstract class Weapon extends GameObject {
 
     protected Entity owner = null;
 
-    protected transient Font font = new Font("华康少女文字W5",Font.PLAIN,15);
+    protected transient Font font = new Font("Times New Roman",Font.PLAIN,15);
     protected int durability;
     protected int maxDurability;
     protected int price;
@@ -21,6 +21,7 @@ public abstract class Weapon extends GameObject {
 
     protected transient ButtonFunction weaponFunction = () -> { //just for equipping in menu
         owner.equipWeapon(this);
+        return true;
     };
     protected transient WeaponButton weaponButton = new WeaponButton(0,0,0,0,null,Color.white,font,weaponFunction,this);
 
@@ -34,8 +35,11 @@ public abstract class Weapon extends GameObject {
 
     public void reinit(){
         super.reinit();
-        font = new Font("华康少女文字W5",Font.PLAIN,15);
-        this.weaponFunction = () -> owner.equipWeapon(this);
+        font = new Font("Times New Roman",Font.PLAIN,15);
+        this.weaponFunction = () -> {
+            owner.equipWeapon(this);
+            return true;
+        };
         this.weaponButton = new WeaponButton(0,0,0,0,null,Color.white,font,weaponFunction,this);
     }
 

@@ -1,6 +1,5 @@
 package game.framework;
 
-import game.window.PlayerHandler;
 import game.MainCanvas;
 import game.entities.Player;
 

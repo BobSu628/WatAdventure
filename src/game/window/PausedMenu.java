@@ -208,6 +208,7 @@ public class PausedMenu extends KeyAdapter {
         this.setActive(false);
         mainCanvas.addKeyListener(game.getKeyInput());
         mainCanvas.removeKeyListener(this);
+        return true;
     };
 
     ButtonFunction but_item_func = () -> {
@@ -216,21 +217,25 @@ public class PausedMenu extends KeyAdapter {
         mainCanvas.addKeyListener(this.getItemMenu());
         mainCanvas.removeKeyListener(this);
         game.getPausedMenu().getItemMenu().initializeItemButtons();
+        return true;
     };
 
     ButtonFunction but_status_func = () -> {
         game.getPausedMenu().setDisplay(false);
         game.getPausedMenu().but_status.setDisplay(true);
+        return true;
     };
     ButtonFunction but_equipment_func = () -> {
         game.getPausedMenu().setDisplay(false);
         game.getPausedMenu().but_equipment.setDisplay(true);
+        return true;
     };
     ButtonFunction but_save_func = () -> {
         game.getPausedMenu().setDisplay(false);
         game.getPausedMenu().but_save.setDisplay(true);
         mainCanvas.addKeyListener(this.getSaveMenu());
         mainCanvas.removeKeyListener(this);
+        return true;
     };
 
     ButtonFunction but_quit_func =() -> {
@@ -243,7 +248,7 @@ public class PausedMenu extends KeyAdapter {
         MainCanvas.state = MainCanvas.STATE.MainMenu;
         mainCanvas.addKeyListener(mainCanvas.getMainMenu());
         mainCanvas.removeKeyListener(this);
-
+        return true;
     };
 
     /*public void contGame (){
@@ -266,26 +271,6 @@ public class PausedMenu extends KeyAdapter {
             buttons.get(i).setY(y + button_height * i);
             buttons.get(i).render(g);
         }
-
-       /* but_cont.setX(x);
-        but_cont.setY(y);
-        but_item.setX(x);
-        but_item .setY(y + button_height);
-        but_equipment.setX(x);
-        but_equipment.setY(y + button_height * 2);
-        but_status.setX(x);
-        but_status.setY(y + button_height * 3);
-        but_help.setX(x);
-        but_help.setY(y + button_height * 4);
-        but_quit.setX(x);
-        but_quit.setY(y);
-
-        but_cont.render(g);
-        but_item.render(g);
-        but_equipment.render(g);
-        but_status.render(g);
-        but_help.render(g);
-        but_quit.render(g);*/
     }
 
     public void initalizeDrawCoin (){

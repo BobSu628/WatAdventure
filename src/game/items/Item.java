@@ -14,20 +14,14 @@ public abstract class Item extends GameObject {
 
     protected Entity owner = null;
 
-    protected transient Font font = new Font("华康少女文字W5",Font.PLAIN,15);
+    protected transient Font font = new Font("Times New Roman",Font.PLAIN,15);
 
     private transient ButtonFunction itemFunction = () -> {
         use();
+        return true;
     };
 
     protected transient ItemButton itemButton = new ItemButton(0,0,0,0,null,Color.white,font,itemFunction,0,this);
-
-
-    /*protected ButtonFunction itemFunction =()->{
-
-    };
-
-    protected ItemButton itemButton = new ItemButton(0,0,0,0,null,Color.white,font,itemFunction,0);*/
 
     public Item(float x, float y, ID id, Handler handler) {
         super(x, y, id, handler);
@@ -37,7 +31,10 @@ public abstract class Item extends GameObject {
     public void reinit(){
         super.reinit();
         font = new Font("华康少女文字W5",Font.PLAIN,15);
-        itemFunction = () -> use();
+        itemFunction = () -> {
+            use();
+            return true;
+        };
         itemButton = new ItemButton(0,0,0,0,null,Color.white,font,itemFunction,0,this);
 
     }

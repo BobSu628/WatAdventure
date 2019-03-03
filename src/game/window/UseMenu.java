@@ -93,6 +93,7 @@ public class UseMenu extends Menu {
             back();
         }
         else superButtons.get(superSelectIndex).getButtonFunction().Function();
+        return true;
     };
 
     ButtonFunction but_equip_function =() -> {
@@ -100,7 +101,7 @@ public class UseMenu extends Menu {
         Item tempItem = tempItemButton.getItem();
         game.getPlayerHandler().myPlayer.setEquippedItem(tempItem);
         back();
-
+        return true;
     };
 
     ButtonFunction but_throw_function =() -> {
@@ -119,8 +120,6 @@ public class UseMenu extends Menu {
             tempItemButton.setNum(tempItemButton.getNum() - 1);
             tempItem.decreaseAfterUse(1);
         }
-        /*if (game.getHandler().player.getItemMap().get(this) <= 0){
-            game.getHandler().player.getItemMap().remove(this);
-        }*/
+        return true;
     };
 }

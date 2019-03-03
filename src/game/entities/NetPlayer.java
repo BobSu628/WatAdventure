@@ -1,25 +1,16 @@
 package game.entities;
 
-import game.framework.PlayerHandler;
-import game.framework.Game;
 import game.colliders.PlayerCollider;
-import game.framework.ID;
-import game.framework.Texture;
+import game.framework.*;
 import game.objects.MeleeAttack;
 import game.window.Animation;
-import game.framework.Handler;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.UUID;
 
-/*
-TODO Crouch
- */
-
-public class Player extends Entity {
-
+public class NetPlayer extends Entity {
     private UUID uuid;
     private String name;
 
@@ -29,38 +20,22 @@ public class Player extends Entity {
         Magic()
     }
 
-    /*
-    public enum AnimationState implements Serializable{
-        Idle_left(),
-        Idle_right(),
-        Walk_left(),
-        Walk_right(),
-        Melee_left(),
-        Melee_right(),
-        Ranged_left(),
-        Ranged_right()
-    }
-    */
-
-    private static final int WALK_X = 5;
-    private static final int RUN_X = 8;
-
     private transient Texture texture;
     private transient Animation playerWalk, playerWalkLeft, playerRangeAttackRight, playerRangeAttackLeft, playerMeleeAttackRight, playerMeleeAttackLeft;
     //private AnimationState animState = AnimationState.Idle_right;
     private MeleeAttack meleeAttack = null;
+    private boolean prevAttacking = false;
     private boolean attacking = false;
-    private boolean canAttack = true;
 
-    private boolean leftWalking, rightWalking, leftRunning, rightRunning;
+    private boolean moving = false;
     private boolean onLadder = false;
-    private boolean isClimbing = false, canClimb = false;
-    private int attackTimer = 20;
+    private boolean isClimbing = false;
+    //private int attackTimer = 20;
     private transient Random random = new Random();
     private int coin = 0;
     private AttackState attackState;
 
-    public Player(float x, float y, UUID uuid, ID id, String name, Handler handler){
+    public NetPlayer(float x, float y, UUID uuid, ID id, String name, Handler handler){
         super(x, y, id, handler);
         this.uuid = uuid; //ID on network
         this.name = name; //user name
@@ -110,57 +85,20 @@ public class Player extends Entity {
     public void tick() {
         super.tick();
 
-        //movement
-        if(!inKnockBack) {
-            if (rightRunning) {
-                facing = 1;
-                velX = RUN_X;
-            } else if (rightWalking) {
-                facing = 1;
-                velX = WALK_X;
-            } else if (!leftRunning && leftWalking) velX = 0;
-
-            if (leftRunning) {
-                facing = -1;
-                velX = -RUN_X;
-            } else if (leftWalking) {
-                facing = -1;
-                velX = -WALK_X;
-            } else if (!rightRunning && !rightWalking) velX = 0;
-
-            if(onLadder) canClimb = true;
-            else canClimb = false;
-
-            if(onLadder && isClimbing){
-                velY = -3;
-                falling = false;
-            }else{
-                falling = true;
-            }
-
-        }else{
-            //if in knockback, player has no control
-            leftWalking = leftRunning = rightWalking = rightRunning = false;
-        }
-
         //attack
         if(this.attacking) {
-            if(attackTimer < 0){
-                attackTimer = 20;
-                attacking = false;
-                meleeAttacking = false;
-                handler.removeObject(meleeAttack);
-            } else{
-                attackTimer --;
-                if(facing == 1) {
-                    this.meleeAttack.setX(x + width);
-                }else{
-                    this.meleeAttack.setX(x - MeleeAttack.width);
-                }
-                this.meleeAttack.setY(y + height / 4.0f);
+            if(facing == 1) {
+                this.meleeAttack.setX(x + width);
+            }else{
+                this.meleeAttack.setX(x - MeleeAttack.width);
             }
+            this.meleeAttack.setY(y + height / 4.0f);
+
+        }else if(this.prevAttacking){
+            handler.removeObject(this.meleeAttack);
+            this.meleeAttack = null;
         }
-        onLadder = false;
+        prevAttacking = attacking;
 
         //animation
         playerWalk.runAnimation();
@@ -185,7 +123,7 @@ public class Player extends Entity {
 
         if(jumping){
             if (meleeAttacking || rangeAttacking){
-                attackAnimation(g);
+                runAttackAnimation(g);
             }
             else if(facing == 1) g.drawImage(texture.player_jump[0], (int)x, (int)y, width, height, null);
             else g.drawImage(texture.player_jump[1], (int)x, (int)y, width, height, null);
@@ -205,11 +143,13 @@ public class Player extends Entity {
                     playerRangeAttackLeft.drawAnimation(g, (int) x, (int) y, width, height);
                 }
             }
-            else if(rightRunning || rightWalking) {
-                playerWalk.drawAnimation(g, (int) x, (int) y, width, height);
-            }else if(leftWalking || leftRunning){
-                playerWalkLeft.drawAnimation(g, (int)x, (int)y, width, height);
-
+            else if(moving) {
+                if(facing == 1) {
+                    playerWalk.drawAnimation(g, (int) x, (int) y, width, height);
+                }
+                else {
+                    playerWalkLeft.drawAnimation(g, (int) x, (int) y, width, height);
+                }
             } else {
                 if(facing == 1) {
                     g.drawImage(texture.player[0], (int) x, (int) y, width, height, null);
@@ -253,7 +193,6 @@ public class Player extends Entity {
 
         if(velX < 0) bulletVelX = Bullet.velXInit - velX;
 
-
         Bullet bullet = new Bullet(attackX, attackY, 0, ID.Bullet, bulletVelX, bulletVelY, this.facing, this.rangeAtk, this.handler);
         this.handler.addObject(bullet);
     }
@@ -284,23 +223,6 @@ public class Player extends Entity {
         return attacking;
     }
 
-    public void setCanAttack(boolean canAttack) {
-        this.canAttack = canAttack;
-    }
-
-    public boolean isCanAttack() {
-        return canAttack;
-    }
-
-    public boolean isCanClimb() {
-        return canClimb;
-    }
-
-    public void setCanClimb(boolean canClimb) {
-        this.canClimb = canClimb;
-    }
-
-
     public boolean isOnLadder() {
         return onLadder;
     }
@@ -330,7 +252,7 @@ public class Player extends Entity {
         else if(attackState == AttackState.Ranged) attackState = AttackState.Melee;
     }
 
-    public void attackAnimation (Graphics g){
+    public void runAttackAnimation (Graphics g){
         if (meleeAttacking) {
             if (facing == 1) {
                 playerMeleeAttackRight.drawAnimation(g, (int) x, (int) y, width, height);
@@ -378,19 +300,7 @@ public class Player extends Entity {
         this.name = name;
     }
 
-    public void setLeftWalking(boolean leftWalking) {
-        this.leftWalking = leftWalking;
-    }
-
-    public void setRightWalking(boolean rightWalking) {
-        this.rightWalking = rightWalking;
-    }
-
-    public void setLeftRunning(boolean leftRunning) {
-        this.leftRunning = leftRunning;
-    }
-
-    public void setRightRunning(boolean rightRunning) {
-        this.rightRunning = rightRunning;
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 }

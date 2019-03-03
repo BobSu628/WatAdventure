@@ -37,7 +37,7 @@ public class WeaponButton extends Button{
         if (!selected) {setColor(new Color(255,255,255));}
         else{
             setColor(new Color(138,43,226,255));
-            font = new Font("华康少女文字W5",Font.BOLD,15);
+            font = new Font("Times New Roman",Font.BOLD,15);
             descriptionLabelBox.render(g);
         }
         g.setFont(font);

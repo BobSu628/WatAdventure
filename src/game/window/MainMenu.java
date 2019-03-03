@@ -15,7 +15,7 @@ public class MainMenu extends Menu{
 
     private Button but_newGame, but_loadGame, but_quit, but_multiplayer;
 
-    private Font font = new Font ("华康少女文字W5",Font.PLAIN,20);
+    private Font font = new Font ("Times New Roman",Font.PLAIN,20);
     private Color color = new Color (138,43,226,200);
 
     private LoadMenu loadMenu;
@@ -78,7 +78,7 @@ public class MainMenu extends Menu{
 
     ButtonFunction but_newGame_function = () ->{
         mainCanvas.startNewGame();
-
+        return true;
     };
 
     ButtonFunction but_loadGame_function = ()->{
@@ -90,14 +90,18 @@ public class MainMenu extends Menu{
         //System.out.println(1);
        mainCanvas.addKeyListener(this.loadMenu);
        mainCanvas.removeKeyListener(this);
+       return true;
     };
 
     ButtonFunction but_multiplayer_function = ()->{
         mainCanvas.startMultiplayer();
-
+        return true;
     };
 
-    ButtonFunction but_quit_function =() -> System.exit(0);
+    ButtonFunction but_quit_function =() -> {
+        System.exit(0);
+        return true;
+    };
 
     public LoadMenu getLoadMenu() {
         return loadMenu;

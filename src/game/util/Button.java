@@ -22,7 +22,7 @@ public class Button {
 
     protected Color notSelectedColor = new Color(255,255,255);
     protected Color selectedColor = new Color(109,90,205,255);
-    protected Font descriptionFont = new Font ("华康少女文字W5",Font.PLAIN,20);
+    protected Font descriptionFont = new Font ("Times New Roman",Font.PLAIN,20);
     protected LabelBox descriptionLabelBox = new LabelBox("aaa",0,0,0,0,Color.WHITE,descriptionFont);
 
     public Button(int x, int y, int width, int height, String label, Color color, Font fnt, ButtonFunction buttonFunction) {
